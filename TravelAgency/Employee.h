@@ -10,9 +10,7 @@ class Employee: public User
         ~Employee();
 
         void createEmployee(int initializer_employee_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
-
         void printEmployee();
-        void print();
 
         void addClient();
         void updateClient();
@@ -21,6 +19,10 @@ class Employee: public User
         void createTravel();
         void updateTravel();
         void deleteTravel();
+
+        void print_id();
+
+        int getID();
 
 
 

@@ -30,16 +30,25 @@ void TravelAgency::showAgencyDetails()
     cin.get();
 }
 
-/*void TravelAgency::addEmployee(Employee myEmployee)
-{
-    tab_employee.push_back(myEmployee);
-}*/
-
 void TravelAgency::addEmployee(int initializer_employee_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
 {
     Employee employee;
     employee.createEmployee(initializer_employee_id, initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
     tab_employee.push_back(employee);
+    employee_number++;
+}
+
+void TravelAgency::removeEmployee(int id)
+{
+    int nbrEmployee = tab_employee.size();
+    for (int i = 0; i < nbrEmployee; i++)
+    {
+        if(tab_employee[i].getID() == id)
+        {
+            tab_employee.erase(tab_employee.begin()+i);
+        }
+    }
+    employee_number--;    
 }
 
 void TravelAgency::printEmployee()
@@ -47,9 +56,8 @@ void TravelAgency::printEmployee()
     int nbrEmployee = tab_employee.size();
     for (int i = 0; i < nbrEmployee; i++)
     {
-        tab_employee[i].print();
+        tab_employee[i].printEmployee();
     }
-    
 }
 
 void TravelAgency::addClient(){}

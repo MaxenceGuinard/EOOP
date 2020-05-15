@@ -12,15 +12,15 @@ compile: $(EXEC)
 
 $(EXEC) : $(OBJ)
 	$(CC) -o $@ $^
-	
+
 clean:
 	rm -rf *.o
 	rm a.out
 
-run: 
+run:
 	./a.out
 
-help: 
+help:
 	@echo ""
 	@echo "Use 'make' with one argument:"
 	@echo ""

@@ -11,7 +11,6 @@ class User
         User();
         ~User();
 
-        //void createAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
         void updateAccount();
         bool checkIdentity();
         void secretTextOn();
@@ -24,9 +23,6 @@ class User
 
 
     protected:
-
-        int user_id;
-
         string email;
 		string username;
 		string password;

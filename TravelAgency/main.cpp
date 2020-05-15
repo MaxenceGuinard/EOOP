@@ -43,7 +43,7 @@ int main()
                         sleep(3);
                         break;
 
-            case 1:
+            case 1:     travelAgency.removeEmployee(2);
                         break;
 
             case 2:
