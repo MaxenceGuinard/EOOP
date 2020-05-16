@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+TravelAgency::~TravelAgency()
+{
+    //dtor
+}
+
 TravelAgency::TravelAgency(string initializer_name, string initializer_address)
 {
     name = initializer_name;
@@ -10,24 +15,12 @@ TravelAgency::TravelAgency(string initializer_name, string initializer_address)
 	client_number = 0;
 }
 
-TravelAgency::~TravelAgency()
-{
-    //dtor
-}
-
 void TravelAgency::showAgencyDetails()
 {
-    system("clear");
-
-    cout << "Travel Agency informations:\n" << endl;
     cout << "Name: ------------------- " << name << endl;
-    cout << "Address: ---------------- " << address << endl;
+    cout << "Address: ---------------- " << address << endl;    
     cout << "Number of employee: ----- " << employee_number << endl;
     cout << "Number of client: ------- " << client_number << endl;
-
-    cout << "\n\nPress enter to continue" << endl;
-    cin.ignore();
-    cin.get();
 }
 
 void TravelAgency::addEmployee(int initializer_employee_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
@@ -45,7 +38,7 @@ void TravelAgency::removeEmployee(int id)
     {
         if(tab_employee[i].getID() == id)
         {
-            tab_employee.erase(tab_employee.begin()+i);
+            tab_employee.erase(tab_employee.begin() + i);
         }
     }
     employee_number--;    
@@ -60,7 +53,35 @@ void TravelAgency::printEmployee()
     }
 }
 
-void TravelAgency::addClient(){}
+void TravelAgency::addClient(int initializer_client_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+{
+    Client client;
+    client.createClient(initializer_client_id, initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
+    tab_client.push_back(client);
+    client_number++;
+}
+
+void TravelAgency::removeClient(int id)
+{
+    int nbrClient = tab_client.size();
+    for (int i = 0; i < nbrClient; i++)
+    {
+        if(tab_client[i].getID() == id)
+        {
+            tab_client.erase(tab_client.begin() + i);
+        }
+    }
+    client_number--;
+}
+
+void TravelAgency::printClient()
+{   
+    int nbrClient = tab_client.size();
+    for (int i = 0; i < nbrClient; i++)
+    {
+        tab_client[i].printClient();
+    }
+}
 
 void TravelAgency::addSuperUser(){}
 

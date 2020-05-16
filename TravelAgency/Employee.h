@@ -20,8 +20,6 @@ class Employee: public User
         void updateTravel();
         void deleteTravel();
 
-        void print_id();
-
         int getID();
 
 

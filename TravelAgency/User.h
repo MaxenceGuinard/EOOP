@@ -11,10 +11,7 @@ class User
         User();
         ~User();
 
-        void updateAccount();
-        bool checkIdentity();
-        void secretTextOn();
-        void secretTextOff();
+        void updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
 
         void showAccount();
         void deleteAccount();
