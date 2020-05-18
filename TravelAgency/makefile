@@ -18,7 +18,7 @@ clean:
 	rm a.out
 
 run:
-	./a.out
+	./a.out -Werror
 
 help:
 	@echo ""

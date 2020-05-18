@@ -9,10 +9,10 @@ class Client: public User
         Client();
         ~Client();
 
-        void createClient(int initializer_client_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void createClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
         void printClient();
 
-
+        void setID(int id);
         int getID();
 
     protected:

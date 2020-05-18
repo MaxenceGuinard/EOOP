@@ -20,36 +20,53 @@ int main()
         system("clear");
     
     cout << "Travel agency creation:" << endl;
-        TravelAgency travelAgency("eTravel", "New York City");
-        travelAgency.showAgencyDetails();
+        TravelAgency* travelAgency = new TravelAgency("eTravel", "New York City");
+        travelAgency->showAgencyDetails();
         cin.get();
         system("clear");
 
-    cout << "Creation of four employee:" << endl;
-        travelAgency.addEmployee(0, "0@e.com", "0e", "password", "name0", "surname", "Address 0");
-        travelAgency.addEmployee(1, "1@e.com", "1e", "password", "name1", "surname", "Address 1");
-        travelAgency.addEmployee(2, "2@e.com", "2e", "password", "name2", "surname", "Address 2");
-        travelAgency.addEmployee(3, "3@e.com", "3e", "password", "name3", "surname", "Address 3");
-        travelAgency.printEmployee();
+    cout << "Creation of four employee including the SuperUser:" << endl;
+        travelAgency->addEmployee("0@e.com", "0e", "password", "name0", "surname", "Address 0");
+        travelAgency->addEmployee("1@e.com", "1e", "password", "name1", "surname", "Address 1");
+        travelAgency->addEmployee("2@e.com", "2e", "password", "name2", "surname", "Address 2");
+        travelAgency->addEmployee("3@e.com", "3e", "password", "name3", "surname", "Address 3");
+        travelAgency->printEmployee();
         cin.get();
         system("clear");
 
     cout << "Creation of two clients:" << endl;
-        travelAgency.addClient(0, "0@e.com", "0e", "password", "name0", "surname", "Address 0");
-        travelAgency.addClient(1, "1@e.com", "1e", "password", "name1", "surname", "Address 1");
-        travelAgency.printClient();
+        travelAgency->addClient("0@e.com", "0e", "password", "name0", "surname", "Address 0");
+        travelAgency->addClient("1@e.com", "1e", "password", "name1", "surname", "Address 1");
+        travelAgency->addClient("2@e.com", "2e", "password", "name2", "surname", "Address 2");
+        travelAgency->addClient("3@e.com", "3e", "password", "name3", "surname", "Address 3");
+        travelAgency->printClient();
         cin.get();
         system("clear");
     
     cout << "Deletion of an employee and a client:" << endl;
-        travelAgency.removeEmployee(0);
-        travelAgency.removeClient(0);
-        cout << "Employee:" << endl;
-        travelAgency.printEmployee();
-        cout << "Client:" << endl;
-        travelAgency.printClient();
-        cin.get();
-        system("clear");
+        cout << "\nBEFORE:" << endl;
+            cout << "Employee:" << endl;
+            travelAgency->printEmployee();
+            cout << "Client:" << endl;
+            travelAgency->printClient();
+        
+    travelAgency->removeEmployee(1);
+    travelAgency->removeClient(0);
+
+        cout << "\nAFTER:" << endl;
+            cout << "Employee:" << endl;
+            travelAgency->printEmployee();
+            cout << "Client:" << endl;
+            travelAgency->printClient();
+    cin.get();
+    system("clear");
+
+    cout << "Deletion of the travel agency" << endl;
+        travelAgency->bankrupt();
+
+    cin.get();
+    system("clear");
+
 
     system("clear");
     return 0;

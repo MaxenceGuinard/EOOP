@@ -5,7 +5,8 @@
 #include <vector>
 
 #include "Employee.h"
-#include  "Client.h"
+#include "Client.h"
+#include "SuperUser.h"
 
 using namespace std;
 
@@ -15,17 +16,18 @@ class TravelAgency
         ~TravelAgency();
 
         TravelAgency(string initializer_name, string initializer_address);
+
         void showAgencyDetails();
         
-        void addEmployee(int initializer_employee_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void addEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
         void removeEmployee(int id);
         void printEmployee(); 
         
-        void addClient(int initializer_client_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void addClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
         void removeClient(int id);
         void printClient();
 
-        void addSuperUser();
+        void addSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
 
         void bankrupt();
 
@@ -39,6 +41,7 @@ class TravelAgency
 
         int employee_number;
         int client_number;
+        int bankrupt_flag;
 
         vector<Employee> tab_employee;
         vector<Client> tab_client;

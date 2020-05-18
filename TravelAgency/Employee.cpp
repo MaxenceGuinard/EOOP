@@ -12,9 +12,8 @@ Employee::~Employee()
     //dtor
 }
 
-void Employee::createEmployee(int initializer_employee_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void Employee::createEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
 {
-    employee_id = initializer_employee_id;
     email = initializer_email;
     username = initializer_username;
     password = initializer_password;
@@ -35,6 +34,11 @@ void Employee::removeClient(){}
 void Employee::createTravel(){}
 void Employee::updateTravel(){}
 void Employee::deleteTravel(){}
+
+void Employee::setID(int id)
+{
+    employee_id = id;
+}
 
 int Employee::getID()
 {

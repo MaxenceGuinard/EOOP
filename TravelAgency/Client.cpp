@@ -12,9 +12,8 @@ Client::~Client()
     //dtor
 }
 
-void Client::createClient(int initializer_client_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void Client::createClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
 {
-    client_id = initializer_client_id;
     email = initializer_email;
     username = initializer_username;
     password = initializer_password;
@@ -26,6 +25,11 @@ void Client::createClient(int initializer_client_id, string initializer_email, s
 void Client::printClient()
 {
     cout << client_id << "; " << email << "; " << username << "; " << name<< "; "  << surname << "; " << address <<  endl;
+}
+
+void Client::setID(int id)
+{
+    client_id = id;
 }
 
 int Client::getID()

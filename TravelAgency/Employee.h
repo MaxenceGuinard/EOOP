@@ -9,7 +9,7 @@ class Employee: public User
         Employee();
         ~Employee();
 
-        void createEmployee(int initializer_employee_id, string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void createEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
         void printEmployee();
 
         void addClient();
@@ -20,6 +20,7 @@ class Employee: public User
         void updateTravel();
         void deleteTravel();
 
+        void setID(int id);
         int getID();
 
 
