@@ -41,3 +41,8 @@ void User::showAccount()
 }
 
 void User::deleteAccount(){}
+
+bool User::isLogin()
+{
+    return is_login;
+}

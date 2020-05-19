@@ -20,10 +20,18 @@ class Employee: public User
         void updateTravel();
         void deleteTravel();
 
+        void logIn();
+        void logOut();
+
+
+
         void setID(int id);
         int getID();
+        string getEmail();
+        string getPassword();
 
 
+        void sayHello();
 
     protected:
 

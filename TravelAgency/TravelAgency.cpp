@@ -14,7 +14,7 @@ TravelAgency::TravelAgency(string initializer_name, string initializer_address)
 	employee_number = 0;
 	client_number = 0;
     bankrupt_flag = 0;
-    addSuperUser("superUser@e.com", "admin", "password", "name0", "surname", "Address 0");
+    addSuperUser("superUser@e.com", "admin", "password", "name", "surname", "Address");
 }
 
 void TravelAgency::showAgencyDetails()
@@ -77,6 +77,7 @@ void TravelAgency::addClient(string initializer_email, string initializer_userna
 
 void TravelAgency::removeClient(int id)
 {
+
     for (int i = 0; i < client_number; i++)
     {
         if(tab_client[i].getID() == id)
@@ -88,9 +89,10 @@ void TravelAgency::removeClient(int id)
 
     for (int i = id; i < client_number; i++)
     {
-        tab_client[i].setID(id);
+        tab_client[i].setID(i);
     }
 }
+
 
 void TravelAgency::printClient()
 {   
@@ -108,6 +110,63 @@ void TravelAgency::addSuperUser(string initializer_email, string initializer_use
     tab_employee.push_back(superUser);
     employee_number++;
 }
+
+void TravelAgency::employeeLogin(string email, string password)
+{
+    bool find_someone = false;
+    for (int i = 0; i < employee_number; i++)
+    {
+        if (tab_employee[i].getEmail() == email)
+        {
+            if (tab_employee[i].getPassword() == password)
+            {
+                tab_employee[i].logIn();
+                find_someone = true;
+            }            
+        }        
+    }
+    if (!find_someone)
+    {
+        cout << "Wrong combinaison email/password." << endl;
+    }
+    
+}
+
+/*void TravelAgency::clientLogin(string email, string password)
+{
+    for (int i = 0; i < client_number; i++)
+    {
+        
+    }
+    
+}*/
+
+Employee TravelAgency::returnEmployee()
+{
+    int a;
+    for (int i = 0; i < employee_number; i++)
+    {
+        if (tab_employee[i].isLogin())
+        {
+            a = i;
+        }
+    } 
+    return tab_employee[a];
+}
+
+void TravelAgency::setEmployee(Employee tempEmployee)
+{
+    for (int i = 0; i < employee_number; i++)
+    {
+        if (tab_employee[i].getID() == tempEmployee.getID())
+        {
+            tab_employee[i] = tempEmployee;
+        } 
+    }
+}
+
+
+
 
 void TravelAgency::bankrupt()
 {

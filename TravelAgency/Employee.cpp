@@ -20,6 +20,7 @@ void Employee::createEmployee(string initializer_email, string initializer_usern
     name = initializer_name;
     surname = initializer_surname;
     address = initializer_address; 
+    is_login = false;
 }
 
 void Employee::printEmployee()
@@ -35,6 +36,19 @@ void Employee::createTravel(){}
 void Employee::updateTravel(){}
 void Employee::deleteTravel(){}
 
+
+void Employee::logIn()
+{
+    cout << "Successfully connected to " << email << " account." << endl;
+    is_login = true;
+}
+
+void Employee::logOut()
+{
+    cout << "Successfully disconnected." << endl;
+    is_login = false;
+}
+
 void Employee::setID(int id)
 {
     employee_id = id;
@@ -43,4 +57,21 @@ void Employee::setID(int id)
 int Employee::getID()
 {
     return employee_id;
+}
+
+string Employee::getEmail()
+{
+    return email;
+}
+
+string Employee::getPassword()
+{
+    return password;
+}
+
+void Employee::sayHello()
+{
+    cout << "Hello I'm " << name << endl;
+    name = "Maxence";
+    cout << "Hello I'm " << name << endl;
 }

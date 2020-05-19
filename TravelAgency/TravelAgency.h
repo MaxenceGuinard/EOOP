@@ -29,8 +29,14 @@ class TravelAgency
 
         void addSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
 
-        void bankrupt();
+        void employeeLogin(string email, string password);
+        void clientLogin(string email, string password);
 
+
+        void bankrupt();
+        
+        Employee returnEmployee();
+        void setEmployee(Employee tempEmployee);
 
     protected:
 
