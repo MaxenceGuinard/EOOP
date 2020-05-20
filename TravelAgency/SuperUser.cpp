@@ -20,4 +20,20 @@ void SuperUser::createSuperUser(string initializer_email, string initializer_use
     name = initializer_name;
     surname = initializer_surname;
     address = initializer_address; 
+    is_login = false;
 }
+
+void SuperUser::printSuperUser()
+{
+    cout << superUser_id << "; " << email << "; " << username << "; " << name<< "; "  << surname << "; " << address <<  endl;
+}
+
+
+// Setter
+
+    void SuperUser::setSUID(int id)
+    {
+    superUser_id = id;
+    }
+
+//

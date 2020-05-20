@@ -8,7 +8,8 @@ default: help
 compile: $(EXEC)
 
 %.o : %.cpp
-	$(CC) -o $@ -c $< -Wall -Wextra -pedantic
+	$(CC) -o $@ -c $< -Wall -Wextra -pedantic 
+#-fsanitize=undefined
 
 $(EXEC) : $(OBJ)
 	$(CC) -o $@ $^

@@ -11,11 +11,18 @@ class User
         User();
         ~User();
 
-        void updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        // Account functions (login need)
+        void login();
 
-        void showAccount();
+            void updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
 
-        void deleteAccount();
+            void deleteAccount();
+
+        void logout();
+
+
+
+        
         
         bool isLogin();
 

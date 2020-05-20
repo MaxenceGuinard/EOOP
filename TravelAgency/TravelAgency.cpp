@@ -2,28 +2,93 @@
 
 #include <iostream>
 
-TravelAgency::~TravelAgency()
-{
-    cout << "Travel agency succesfully deleted." << endl;
-}
-
+// Agency functions 
 TravelAgency::TravelAgency(string initializer_name, string initializer_address)
 {
     name = initializer_name;
 	address = initializer_address;
 	employee_number = 0;
 	client_number = 0;
+    superUser_number = 0;
     bankrupt_flag = 0;
-    addSuperUser("superUser@e.com", "admin", "password", "name", "surname", "Address");
+    addSuperUser("superuser@etravel.com", "admin", "password", "name", "surname", "Address");
 }
 
-void TravelAgency::showAgencyDetails()
+        void TravelAgency::showAgencyDetails()
+        {
+            cout << "Name: ------------------- " << name << endl;
+            cout << "Address: ---------------- " << address << endl;    
+            cout << "Number of employee: ----- " << employee_number << endl;
+            cout << "Number of client: ------- " << client_number << endl;
+            cout << "Number of SuperUser: ---- " << superUser_number << endl;
+        }
+
+        void TravelAgency::bankrupt()
+        {
+            bankrupt_flag = 1;
+            int client_number_to_remove = client_number;
+            int employee_number_to_remove = employee_number;
+
+            for (int i = 0; i < client_number_to_remove; i++)
+            {
+                removeClient(client_number - 1);
+            }
+    
+            for (int i = 0; i < employee_number_to_remove; i++)
+            {
+                removeEmployee(employee_number - 1);
+            }
+
+            this->~TravelAgency();
+        }
+
+TravelAgency::~TravelAgency()
 {
-    cout << "Name: ------------------- " << name << endl;
-    cout << "Address: ---------------- " << address << endl;    
-    cout << "Number of employee: ----- " << employee_number << endl;
-    cout << "Number of client: ------- " << client_number << endl;
+    cout << "Travel agency succesfully deleted." << endl;
 }
+
+// SuperUser functions
+void TravelAgency::addSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+{
+    SuperUser superUser;
+    superUser.createSuperUser(initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
+    superUser.setSUID(superUser_number);
+    tab_superUser.push_back(superUser);
+    superUser_number++;
+}
+
+        void TravelAgency::printSuperUser()
+        {
+            tab_superUser[0].printSuperUser();
+        }
+
+        void TravelAgency::superUserLogin(string email, string password)
+        {
+            bool find_someone = false;
+            if (tab_superUser[0].getEmail() == email && tab_superUser[0].getPassword() == password)
+            {
+                tab_superUser[0].login();
+                find_someone = true;        
+            }        
+        
+            if (!find_someone)
+            {
+                cout << "Wrong combinaison email/password." << endl;
+            }
+        }
+
+        SuperUser TravelAgency::returnSuperUser()
+        {
+            return tab_superUser[0];
+        }
+        
+        void TravelAgency::setSuperUser(SuperUser tempSuperUser)
+        {
+            tab_superUser[0] = tempSuperUser;
+        }
+
+
+// Employee functions
 
 void TravelAgency::addEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
 {
@@ -34,38 +99,74 @@ void TravelAgency::addEmployee(string initializer_email, string initializer_user
     employee_number++;
 }
 
-void TravelAgency::removeEmployee(int id)
-{
-    if((bankrupt_flag == 0 && id != 0) || bankrupt_flag == 1)
-    {
-        for (int i = 0; i < employee_number; i++)
+        void TravelAgency::printEmployee()
         {
-            if(tab_employee[i].getID() == id)
+            for (int i = 0; i < employee_number; i++)
             {
-                tab_employee.erase(tab_employee.begin() + i);
+                tab_employee[i].printEmployee();
             }
         }
-        employee_number--;    
-    
-        for (int i = id; i < employee_number; i++)
-        {
-            tab_employee[i].setID(i);
-        }
-    }
-    else
-    {
-        cout << "\nError: You can't remove the admin account." << endl;
-    }
-}
 
-void TravelAgency::printEmployee()
+        void TravelAgency::employeeLogin(string email, string password)
+        {
+            bool find_someone = false;
+            for (int i = 0; i < employee_number; i++)
+            {
+                if (tab_employee[i].getEmail() == email && tab_employee[i].getPassword() == password)
+                {
+                    tab_employee[i].login();
+                    find_someone = true;        
+                }        
+            }
+            if (!find_someone)
+            {
+                cout << "Wrong combinaison email/password." << endl;
+            }
+        }
+
+        Employee TravelAgency::returnEmployee()
+        {
+            int a;
+            for (int i = 0; i < employee_number; i++)
+            {
+                if (tab_employee[i].isLogin())
+                {
+                    a = i;
+                }
+            } 
+            return tab_employee[a];
+        }
+
+        void TravelAgency::setEmployee(Employee tempEmployee)
+        {
+            for (int i = 0; i < employee_number; i++)
+            {
+                if (tab_employee[i].getID() == tempEmployee.getID() && tab_employee[i].isLogin())
+                {
+                    tab_employee[i] = tempEmployee;
+                } 
+            }
+        }
+
+void TravelAgency::removeEmployee(int id)
 {
     for (int i = 0; i < employee_number; i++)
     {
-        tab_employee[i].printEmployee();
+        if(tab_employee[i].getID() == id)
+        {
+            tab_employee.erase(tab_employee.begin() + i);
+        }
+    }
+    employee_number--;    
+    
+    for (int i = id; i < employee_number; i++)
+    {
+        tab_employee[i].setID(i);
     }
 }
 
+
+// Client functions
 void TravelAgency::addClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
 {
     Client client;
@@ -74,6 +175,56 @@ void TravelAgency::addClient(string initializer_email, string initializer_userna
     tab_client.push_back(client);
     client_number++;
 }
+
+        void TravelAgency::printClient()
+        {   
+            for (int i = 0; i < client_number; i++)
+            {
+            tab_client[i].printClient();
+            }
+        }
+
+        void TravelAgency::clientLogin(string email, string password)
+        {
+            bool find_someone = false;
+            for (int i = 0; i < client_number; i++)
+            {
+                if (tab_client[i].getEmail() == email && tab_client[i].getPassword() == password)
+                {
+                    tab_client[i].login();
+                    find_someone = true;
+                }
+            }
+            if (!find_someone)
+            {
+                cout << "Wrong combinaison email/password." << endl;
+            }
+        }
+
+        Client TravelAgency::returnClient()
+        {
+            int a;
+            for (int i = 0; i < client_number; i++)
+            {
+                if (tab_client[i].isLogin())
+                {
+                    a = i;
+                }
+            }
+            return tab_client[a];
+        }
+
+        void TravelAgency::setClient(Client tempClient)
+        {
+            for (int i = 0; i < client_number; i++)
+            {
+                if (tab_client[i].getID() == tempClient.getID())
+                {
+                    tab_client[i] = tempClient;
+                }
+            }
+        }
+        
 
 void TravelAgency::removeClient(int id)
 {
@@ -94,95 +245,11 @@ void TravelAgency::removeClient(int id)
 }
 
 
-void TravelAgency::printClient()
-{   
-    for (int i = 0; i < client_number; i++)
-    {
-        tab_client[i].printClient();
-    }
-}
-
-void TravelAgency::addSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
-{
-    SuperUser superUser;
-    superUser.createSuperUser(initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
-    superUser.setID(employee_number);
-    tab_employee.push_back(superUser);
-    employee_number++;
-}
-
-void TravelAgency::employeeLogin(string email, string password)
-{
-    bool find_someone = false;
-    for (int i = 0; i < employee_number; i++)
-    {
-        if (tab_employee[i].getEmail() == email)
-        {
-            if (tab_employee[i].getPassword() == password)
-            {
-                tab_employee[i].logIn();
-                find_someone = true;
-            }            
-        }        
-    }
-    if (!find_someone)
-    {
-        cout << "Wrong combinaison email/password." << endl;
-    }
-    
-}
-
-/*void TravelAgency::clientLogin(string email, string password)
-{
-    for (int i = 0; i < client_number; i++)
-    {
-        
-    }
-    
-}*/
-
-Employee TravelAgency::returnEmployee()
-{
-    int a;
-    for (int i = 0; i < employee_number; i++)
-    {
-        if (tab_employee[i].isLogin())
-        {
-            a = i;
-        }
-    } 
-    return tab_employee[a];
-}
-
-void TravelAgency::setEmployee(Employee tempEmployee)
-{
-    for (int i = 0; i < employee_number; i++)
-    {
-        if (tab_employee[i].getID() == tempEmployee.getID())
-        {
-            tab_employee[i] = tempEmployee;
-        } 
-    }
-}
 
 
 
 
-void TravelAgency::bankrupt()
-{
-    bankrupt_flag = 1;
-    int client_number_to_remove = client_number;
-    int employee_number_to_remove = employee_number;
 
-    for (int i = 0; i < client_number_to_remove; i++)
-    {
-        removeClient(client_number - 1);
-    }
-    
-    for (int i = 0; i < employee_number_to_remove; i++)
-    {
-        removeEmployee(employee_number - 1);
-    }
 
-    this->~TravelAgency();
-}
+
+

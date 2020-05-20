@@ -14,33 +14,37 @@ User::~User()
     //dtor
 }
 
-void User::updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+// Account functions (login need)
+void User::login()
 {
-    email = initializer_email;
-    username = initializer_username;
-    password = initializer_password;
-    name = initializer_name;
-    surname = initializer_surname;
-    address = initializer_address; 
+    cout << "Successfully connected to " << email << " account." << endl;
+    is_login = true;
 }
 
-void User::showAccount()
+    // Client help functions
+    void User::updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+    {
+        email = initializer_email;
+        username = initializer_username;
+        password = initializer_password;
+        name = initializer_name;
+        surname = initializer_surname;
+        address = initializer_address; 
+    }
+
+    void User::deleteAccount(){}
+
+void User::logout()
 {
-    system("clear");
-
-    cout << "Account informations:\n" << endl;
-    cout << "Email: ------------------ " << email << endl;
-    cout << "Username: --------------- " << username << endl;
-    cout << "Name: ------------------- " << name << endl;
-    cout << "Surname: ---------------- " << surname << endl;
-    cout << "Address: ---------------- " << address << endl;
-
-    cout << "\n\nPress enter to continue" << endl;
-    cin.ignore();
-    cin.get();
+    cout << "Successfully disconnected." << endl;
+    is_login = false;
 }
 
-void User::deleteAccount(){}
+
+
+
+
+
 
 bool User::isLogin()
 {

@@ -9,12 +9,26 @@ class Client: public User
         Client();
         ~Client();
 
+        // Call by TravelAgency.cpp
         void createClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
         void printClient();
 
-        void setID(int id);
-        int getID();
+        // Client functions (login need)
 
+
+
+        //
+
+        // Getter
+            int getID();
+            string getEmail();
+            string getPassword();
+        //
+
+        // Setter
+            void setID(int id);
+        //
+        
     protected:
 
     private:

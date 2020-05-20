@@ -12,6 +12,7 @@ Employee::~Employee()
     //dtor
 }
 
+// Call by TravelAgency.cpp
 void Employee::createEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
 {
     email = initializer_email;
@@ -28,46 +29,46 @@ void Employee::printEmployee()
     cout << employee_id << "; " << email << "; " << username << "; " << name<< "; "  << surname << "; " << address <<  endl;
 }
 
-void Employee::addClient(){}
-void Employee::updateClient(){}
-void Employee::removeClient(){}
+// Employee functions (login need)
 
-void Employee::createTravel(){}
-void Employee::updateTravel(){}
-void Employee::deleteTravel(){}
+    // Client help functions
+    void Employee::addClient(){}
+    void Employee::updateClient(){}
+    void Employee::removeClient(){}
+
+    // Travel functions
+    void Employee::createTravel(){}
+    void Employee::updateTravel(){}
+    void Employee::deleteTravel(){}
+
+//
+
+// Getter
+    int Employee::getID()
+    {
+        return employee_id;
+    }
+
+    string Employee::getEmail()
+    {
+        return email;
+    }
+
+    string Employee::getPassword()
+    {
+        return password;
+    }
+//
+
+// Setter
+    void Employee::setID(int id)
+    {
+        employee_id = id;
+    }
+//
 
 
-void Employee::logIn()
-{
-    cout << "Successfully connected to " << email << " account." << endl;
-    is_login = true;
-}
 
-void Employee::logOut()
-{
-    cout << "Successfully disconnected." << endl;
-    is_login = false;
-}
-
-void Employee::setID(int id)
-{
-    employee_id = id;
-}
-
-int Employee::getID()
-{
-    return employee_id;
-}
-
-string Employee::getEmail()
-{
-    return email;
-}
-
-string Employee::getPassword()
-{
-    return password;
-}
 
 void Employee::sayHello()
 {
