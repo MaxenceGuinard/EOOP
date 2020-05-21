@@ -1,5 +1,7 @@
 #include "Employee.h"
 
+#include "TravelAgency.h"
+
 #include <iostream>
 
 Employee::Employee()
@@ -40,6 +42,12 @@ void Employee::printEmployee()
     void Employee::createTravel(){}
     void Employee::updateTravel(){}
     void Employee::deleteTravel(){}
+
+    void Employee::deleteAccount(TravelAgency* travelAgency)
+    {
+        travelAgency->removeEmployee(employee_id);
+        cout << "test" << endl;
+    }
 
 //
 

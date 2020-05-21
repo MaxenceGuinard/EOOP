@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class TravelAgency;
+
 class User
 {
     public:
@@ -15,8 +17,6 @@ class User
         void login();
 
             void updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
-
-            void deleteAccount();
 
         void logout();
 

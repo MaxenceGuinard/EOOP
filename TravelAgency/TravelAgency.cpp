@@ -1,4 +1,7 @@
 #include "TravelAgency.h"
+#include "Employee.h"
+#include "Client.h"
+#include "SuperUser.h"
 
 #include <iostream>
 
@@ -86,7 +89,7 @@ void TravelAgency::addSuperUser(string initializer_email, string initializer_use
         {
             tab_superUser[0] = tempSuperUser;
         }
-
+//
 
 // Employee functions
 

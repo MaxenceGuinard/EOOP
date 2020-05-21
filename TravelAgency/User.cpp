@@ -32,8 +32,6 @@ void User::login()
         address = initializer_address; 
     }
 
-    void User::deleteAccount(){}
-
 void User::logout()
 {
     cout << "Successfully disconnected." << endl;

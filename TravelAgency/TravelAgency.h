@@ -4,9 +4,10 @@
 #include <string>
 #include <vector>
 
-#include "Employee.h"
-#include "Client.h"
 #include "SuperUser.h"
+
+class Employee;
+class Client;
 
 using namespace std;
 
@@ -28,7 +29,8 @@ class TravelAgency
             void superUserLogin(string email, string password);
             SuperUser returnSuperUser();
             void setSuperUser(SuperUser tempSuperUser);
-
+        //
+        
         // Employee functions
         void addEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
             
@@ -49,6 +51,11 @@ class TravelAgency
 
         void removeClient(int id);
 
+
+        vector<Employee> tab_employee;
+        vector<Client> tab_client;
+        vector<SuperUser> tab_superUser;
+        
     protected:
 
     private:
@@ -62,9 +69,7 @@ class TravelAgency
 
         int bankrupt_flag;
 
-        vector<Employee> tab_employee;
-        vector<Client> tab_client;
-        vector<SuperUser> tab_superUser;
+        
 
 };
 #endif

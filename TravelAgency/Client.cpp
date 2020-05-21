@@ -1,5 +1,7 @@
 #include "Client.h"
 
+#include "TravelAgency.h"
+
 #include <iostream>
 
 Client::Client()
@@ -31,7 +33,10 @@ void Client::printClient()
 
 // Client functions (login need)
 
-
+    void Client::deleteAccount(TravelAgency* travelAgency)
+    {
+        travelAgency->removeClient(client_id);
+    }
 
 //
 

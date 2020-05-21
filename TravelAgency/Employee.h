@@ -3,6 +3,8 @@
 
 #include "User.h"
 
+class TravelAgency;
+
 class Employee: public User
 {
     public:
@@ -26,6 +28,8 @@ class Employee: public User
             void createTravel();
             void updateTravel();
             void deleteTravel();
+
+            void deleteAccount(TravelAgency* travelAgency);
         
         //
 

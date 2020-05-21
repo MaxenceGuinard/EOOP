@@ -12,11 +12,11 @@ void wait()
 {
     cin.get();
     system("clear");
-}
+}    
 
     Employee tempEmployee;
     Client tempClient;
-    SuperUser tempSuperUser;        
+    SuperUser tempSuperUser;   
 
 int main()
 {

@@ -3,6 +3,8 @@
 
 #include "User.h"
 
+class TravelAgency;
+
 class Client: public User
 {
     public:
@@ -15,7 +17,7 @@ class Client: public User
 
         // Client functions (login need)
 
-
+            void deleteAccount(TravelAgency* travelAgency);
 
         //
 
