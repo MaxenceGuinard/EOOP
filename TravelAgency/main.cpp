@@ -110,16 +110,16 @@ int main()
         travelAgency->employeeLogin("2@etravel.com", "password");
         
             tempEmployee = travelAgency->returnEmployee();
-            tempEmployee.createTravel(travelAgency, "New York",10, "22.05.2020", "28.05.2020", 144, 500);
-            tempEmployee.createTravel(travelAgency, "Warsaw", 35, "10.07.2020", "14.05.2020", 96, 250);
-            tempEmployee.createTravel(travelAgency, "Punta Cana",40, "10.07.2020", "16.07.2020", 144, 700);
-            tempEmployee.createTravel(travelAgency, "Paris", 40, "20.08.2020", "25.08.2020", 120, 750);
+            tempEmployee.createTravel(travelAgency, "New York",10, "22.05.2020", "28.05.2020", 6);
+            tempEmployee.createTravel(travelAgency, "Warsaw", 35, "10.07.2020", "14.05.2020", 4);
+            tempEmployee.createTravel(travelAgency, "Punta Cana",40, "10.07.2020", "16.07.2020", 6);
+            tempEmployee.createTravel(travelAgency, "Paris", 40, "20.08.2020", "25.08.2020", 5);
             travelAgency->printTravel();
         waitNoClear();
 
         cout << "Modifying one travel travel (still connected with the same employee):" << endl;
 
-            tempEmployee.updateTravel(travelAgency, 0, "Monaco", 15, "22.05.2020", "28.05.2020", 96, 500);
+            tempEmployee.updateTravel(travelAgency, 0, "Monaco", 15, "22.05.2020", "28.05.2020", 96);
             travelAgency->printTravel();
         waitNoClear();
 
@@ -132,10 +132,10 @@ int main()
     
     cout << "Add four hotel in a travel (We are still connected with the employee):" << endl;
 
-            tempEmployee.addHotel(travelAgency, 2, "Paris", "Cinq étoiles", 120);
-            tempEmployee.addHotel(travelAgency, 2, "Paris", "Quatre étoiles", 96);
-            tempEmployee.addHotel(travelAgency, 2, "Paris", "Trois étoiles", 72);
-            tempEmployee.addHotel(travelAgency, 2, "Paris", "Deux étoiles", 48);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Cinq étoiles", 120);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Quatre étoiles", 96);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Trois étoiles", 72);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Deux étoiles", 48);
             travelAgency->printTravel();
         waitNoClear();
 

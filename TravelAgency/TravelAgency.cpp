@@ -168,13 +168,13 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             
         }
 
-        void TravelAgency::updateTravel(int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price)
+        void TravelAgency::updateTravel(int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration)
         {
             for (int i = 0; i < travel_number; i++)
             {
                 if (tab_travel[i].getID() == _travel_id)
                 {
-                    tab_travel[i].updateTravel(_destination, _place_available, _start_date, _end_date, _duration, _price);
+                    tab_travel[i].updateTravel(_destination, _place_available, _start_date, _end_date, _duration);
                 }    
             }
         }
@@ -198,24 +198,24 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         }
 
         // Hotel functions
-        void TravelAgency::addHotel(int _travel_id, string _address, string _name, double _price)
+        void TravelAgency::addHotel(int _travel_id, int _night_number, string _address, string _name, double _price)
         {
             for (int i = 0; i < travel_number; i++)
             {
                 if (tab_travel[i].getID() == _travel_id)
                 {
-                    tab_travel[i].addHotel(_address, _name, _price);
+                    tab_travel[i].addHotel(_night_number, _address, _name, _price);
                 }
             }
         }
 
-                void TravelAgency::updateHotel(int _travel_id, int _hotel_id, string _address, string _name, double _price)
+                void TravelAgency::updateHotel(int _travel_id, int _hotel_id, int _night_number, string _address, string _name, double _price)
                 {
                     for (int i = 0; i < travel_number; i++)
                     {
                         if (tab_travel[i].getID() == _travel_id)
                         {
-                            tab_travel[i].updateHotel(_hotel_id, _address, _name, _price);
+                            tab_travel[i].updateHotel(_hotel_id, _night_number, _address, _name, _price);
                         }
                     }
                 }
@@ -304,6 +304,42 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 if (tab_client[i].getID() == tempClient.getID())
                 {
                     tab_client[i] = tempClient;
+                }
+            }
+        }
+
+        // Booking functions
+        Travel TravelAgency::returnBooking(int _travel_id)
+        {
+            int a = 0;
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    a = i;
+                }
+            } 
+            return tab_travel[a];
+        }
+
+        void TravelAgency::addedBook(int _travel_id)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    tab_travel[i].addedBook();
+                }
+            } 
+        }
+
+        void TravelAgency::deletedBook(int _travel_id)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    tab_travel[i].deletedBook();
                 }
             }
         }

@@ -26,14 +26,14 @@ class Employee: public User
             void removeClient();
         
             // Travel functions
-            void createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price);
+            void createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
                 
-                void updateTravel(TravelAgency* travelAgency, int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price);
+                void updateTravel(TravelAgency* travelAgency, int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
                 
                 // Hotel functions
-                void addHotel(TravelAgency* travelAgency, int _travel_id, string _address, string _name, double _price);
+                void addHotel(TravelAgency* travelAgency, int _travel_id, int _night_number, string _address, string _name, double _price);
                 
-                    void updateHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id, string _address, string _name, double _price);
+                    void updateHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id, int _night_number, string _address, string _name, double _price);
 
                 void deleteHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id);
 

@@ -2,8 +2,9 @@
 
 #include <iostream>
 
-Hotel::Hotel(string _address, string _name, double _price)
+Hotel::Hotel(int _night_number, string _address, string _name, double _price)
 {
+    night_number = _night_number;
     address = _address;
     name = _name;
     price = _price;
@@ -11,11 +12,12 @@ Hotel::Hotel(string _address, string _name, double _price)
 
         void Hotel::print()
         {
-            cout << "       " << hotel_id << "; " << name << "; " << address << "; " << price << endl;
+            cout << "       " << hotel_id << "; " << night_number << "; " << name << "; " << address << "; " << price << endl;
         }
 
-        void Hotel::update(string _address, string _name, double _price)
+        void Hotel::update(int _night_number, string _address, string _name, double _price)
         {
+            night_number = _night_number;
             address = _address;
             name = _name;
             price = _price;
@@ -31,6 +33,16 @@ Hotel::~Hotel()
     int Hotel::getID()
     {
         return hotel_id;
+    }
+
+    double Hotel::getPrice()
+    {
+        return price;
+    }
+
+    int Hotel::getNightNbr()
+    {
+        return night_number;
     }
 
 //

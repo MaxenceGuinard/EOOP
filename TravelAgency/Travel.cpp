@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Travel::Travel(int _creator_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price)
+Travel::Travel(int _creator_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration)
 {
     creator_id = _creator_id;
     destination = _destination;
@@ -10,10 +10,8 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
     start_date = _start_date;
     end_date = _end_date;
     duration = _duration;
-    price = _price;
     hotel_number = 0;
-    plane_number = 0;
-    train_number = 0;
+    price = 0;
 }
 
         void Travel::print()
@@ -22,23 +20,23 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
             printHotel();
         }
 
-        void Travel::updateTravel(string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price)
+        void Travel::updateTravel(string _destination, int _place_available, string _start_date, string _end_date, double _duration)
         {
             destination = _destination;
             place_available = _place_available;
             start_date = _start_date;
             end_date = _end_date;
             duration = _duration;
-            price = _price;
         }
 
         // Hotel functions
-        void Travel::addHotel(string _address, string _name, double _price)
+        void Travel::addHotel(int _night_number, string _address, string _name, double _price)
         {
-            Hotel hotel(_address, _name, _price);
+            Hotel hotel(_night_number, _address, _name, _price);
             hotel.setID(hotel_number);
             tab_hotel.push_back(hotel);
             hotel_number++;
+            setPrice();
         }
 
                 void Travel::printHotel()
@@ -53,13 +51,14 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
                     }
                 }
 
-            void Travel::updateHotel(int _hotel_id, string _address, string _name, double _price)
+            void Travel::updateHotel(int _hotel_id, int _night_number, string _address, string _name, double _price)
             {
                 for (int i = 0; i < hotel_number; i++)
                 {
                     if (tab_hotel[i].getID() == _hotel_id)
                     {
-                        tab_hotel[i].update(_address, _name, _price);
+                        tab_hotel[i].update(_night_number, _address, _name, _price);
+                        setPrice();
                     }  
                 }
             }
@@ -79,6 +78,18 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
             {
                 tab_hotel[i].setID(i);
             }
+            setPrice();
+        }
+
+        // Booking functions
+        void Travel::addedBook()
+        {
+
+        }
+
+        void Travel::deletedBook()
+        {
+
         }
 
 Travel::~Travel()
@@ -94,6 +105,16 @@ Travel::~Travel()
         return travel_id;
     }
 
+    string Travel::getTitle()
+    {
+        return destination;
+    }
+
+    double Travel::getPrice()
+    {
+        return price;
+    }
+
 //
 
 // Setter
@@ -101,6 +122,15 @@ Travel::~Travel()
     void Travel::setID(int id)
     {
         travel_id = id;
+    }
+
+    void Travel::setPrice()
+    {
+        price = 0;
+        for (int i = 0; i < hotel_number; i++)
+        {
+            price = price + (tab_hotel[i].getNightNbr() * tab_hotel[i].getPrice());
+        }
     }
 
 //
