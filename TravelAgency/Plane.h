@@ -8,18 +8,35 @@ using namespace std;
 class Plane
 {
     public:
-        Plane(string _flight_id, string _date, string _start_airport, string _arriving_airport, string _start_time, string _arriving_time);
+        Plane(string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+        
+                void print();
+                void updatePlane(string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+        
         ~Plane();       
 
-    protected:
+        // Getter
+
+            int getID();
+            double getPrice();
+
+        //
+
+        // Setter 
+
+            void setID(int id);
+
+        //
+
 
     private:
+        int plane_id;
+
         string flight_id; 
         string date;
-        string start_airport;
-        string arriving_airport;
-        string start_time;
-        string arriving_time;
+        string a_to_b;
+        string ad_time;
+
         double price;
 };
 #endif

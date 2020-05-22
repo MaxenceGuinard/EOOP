@@ -50,29 +50,104 @@ void Client::printClient()
             Booking booking(_travel_id);
             travelAgency->addedBook(_travel_id);
             booking.setTitle(travelAgency->returnBooking(_travel_id).getTitle());
-            booking.setTotalDue(travelAgency->returnBooking(_travel_id).getPrice());
+            booking.setTravelPrice(travelAgency->returnBooking(_travel_id).getPrice());
             booking.setID(booking_number);
             tab_booking.push_back(booking);
             booking_number++;
         }
-        
-            void Client::updateBooking(){}
 
+            void Client::printBooking()
+            {   
+                for (int i = 0; i < booking_number; i++)
+                {
+                    tab_booking[i].print();
+                }
+            }
+            
             // Plane functions
-            void Client::addPlane(){}
+            void Client::addPlane(int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
+            {
+                for (int i = 0; i < booking_number; i++)
+                {
+                    if (tab_booking[i].getID() == _bookind_id)
+                    {
+                        tab_booking[i].addPlane(_flight_id, _date, _a_to_b, _ad_time, _price);
+                    }
+                }
+            }
 
-                void Client::updatePlane(){}
+                void Client::updatePlane(int _bookind_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
+                {
+                    for (int i = 0; i < booking_number; i++)
+                    {
+                        if (tab_booking[i].getID() == _bookind_id)
+                        {
+                            tab_booking[i].updatePlane(_plane_id, _flight_id, _date, _a_to_b, _ad_time, _price);
+                        }  
+                    }
+                }
 
-            void Client::deletePlane(){}
+            void Client::deletePlane(int _booking_id, int _plane_id)
+            {
+                for (int i = 0; i < booking_number; i++)
+                {
+                    if (tab_booking[i].getID() == _booking_id)
+                    {
+                        tab_booking[i].deletePlane(_plane_id);
+                    }
+                }
+            }
 
             // Train functions
-            void Client::addTrain(){}
+            void Client::addTrain(int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
+            {
+                for (int i = 0; i < booking_number; i++)
+                {
+                    if (tab_booking[i].getID() == _bookind_id)
+                    {
+                        tab_booking[i].addTrain(_train_number_id, _date, _a_to_b, _ad_time, _price);
+                    }
+                }
+            }
 
-                void Client::updateTrain(){}
+                void Client::updateTrain(int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
+                {
+                    for (int i = 0; i < booking_number; i++)
+                    {
+                        if (tab_booking[i].getID() == _bookind_id)
+                        {
+                            tab_booking[i].updatePlane(_train_id, _train_number_id, _date, _a_to_b, _ad_time, _price);
+                        }  
+                    }
+                }
 
-            void Client::deleteTrain(){}
+            void Client::deleteTrain(int _booking_id, int _train_id)
+            {
+                for (int i = 0; i < booking_number; i++)
+                {
+                    if (tab_booking[i].getID() == _booking_id)
+                    {
+                        tab_booking[i].deleteTrain(_train_id);
+                    }
+                }
+            }
 
-        void Client::deleteBooking(){}
+        void Client::deleteBooking(int _booking_id)
+        {
+            for (int i = 0; i < booking_number; i++)
+            {
+                if (tab_booking[i].getID() == _booking_id)
+                {
+                    tab_booking.erase(tab_booking.begin() + i);
+                }
+            }
+            booking_number--;
+
+            for (int i = 0; i < booking_number; i++)
+            {
+                tab_booking[i].setID(i);
+            }
+        }
 //
 
 // Getter

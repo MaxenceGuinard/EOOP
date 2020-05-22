@@ -2,7 +2,11 @@
 #define BOOKING_H
 
 #include <string>
+#include <vector>
+
 #include "Travel.h"
+#include "Plane.h"
+#include "Train.h"
 
 using namespace std;
 
@@ -14,7 +18,23 @@ class Booking
 
         void bookTravel();
 
-            void updateBooking();
+            void print();
+
+            // Plane functions
+            void addPlane(string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+            
+                void printPlane();
+                void updatePlane(int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+            void deletePlane(int _plane_id);
+
+            // Train functions
+            void addTrain(string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+                void printTrain();
+                void updateTrain(int _train_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+            void deleteTrain(int _train_id);
 
         void deleteBooking();
 
@@ -28,7 +48,10 @@ class Booking
 
             void setID(int _id);    
             void setTitle(string _title);
-            void setTotalDue(int _price);
+            void setTotalDue();
+            void setTravelPrice(double _price);
+            void setPlanePrice();
+            void setTrainPrice();
         
         //
 
@@ -36,7 +59,19 @@ class Booking
         int booking_id;
         int travel_id;
         string title;
+
         double total_due;
+        double travel_price;
+        double plane_price;
+        double train_price;
+        
         bool is_payed;
+
+        int plane_number;
+        int train_number;
+
+        vector<Plane> tab_plane;
+        vector<Train> tab_train;
+
 };
 #endif

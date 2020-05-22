@@ -29,24 +29,24 @@ class Client: public User
 
             // Booking functions
             void addBooking(TravelAgency* travelAgency, int _travel_id);
-
-                void updateBooking();
                 
-                // Plane functions
-                void addPlane();
+                void printBooking();
 
-                    void updatePlane();
+                // Plane functions
+                void addPlane(int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+                    void updatePlane(int _booking_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
                     
-                void deletePlane();
+                void deletePlane(int _booking_id, int _plane_id);
 
                 // Train functions
-                void addTrain();
+                void addTrain(int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
 
-                    void updateTrain();
+                    void updateTrain(int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
 
-                void deleteTrain();
+                void deleteTrain(int _booking_id, int _train_id);
 
-            void deleteBooking();
+            void deleteBooking(int _booking_id);
 
         //
 

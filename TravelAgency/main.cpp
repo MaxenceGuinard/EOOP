@@ -104,8 +104,6 @@ int main()
         travelAgency->printSuperUser();
     wait();
 
-    //Quand le client book faire une variable remoteness qui augmente le prix suivant la distance du client
-
     cout << "Login to an employee to create four travel:" << endl;
         travelAgency->employeeLogin("2@etravel.com", "password");
         
@@ -113,11 +111,11 @@ int main()
             tempEmployee.createTravel(travelAgency, "New York",10, "22.05.2020", "28.05.2020", 6);
             tempEmployee.createTravel(travelAgency, "Warsaw", 35, "10.07.2020", "14.05.2020", 4);
             tempEmployee.createTravel(travelAgency, "Punta Cana",40, "10.07.2020", "16.07.2020", 6);
-            tempEmployee.createTravel(travelAgency, "Paris", 40, "20.08.2020", "25.08.2020", 5);
+            tempEmployee.createTravel(travelAgency, "Paris", 40, "20.08.2020", "23.08.2020", 3);
             travelAgency->printTravel();
         waitNoClear();
 
-        cout << "Modifying one travel travel (still connected with the same employee):" << endl;
+        cout << "Modifying one travel (still connected with the same employee):" << endl;
 
             tempEmployee.updateTravel(travelAgency, 0, "Monaco", 15, "22.05.2020", "28.05.2020", 96);
             travelAgency->printTravel();
@@ -143,6 +141,62 @@ int main()
 
             tempEmployee.deleteHotel(travelAgency, 2, 1);
             travelAgency->printTravel();
+    wait();
+
+    cout << "Login to a client to book three travel:" << endl;
+        travelAgency->clientLogin("3@gmail.com", "password");
+
+            tempClient = travelAgency->returnClient();
+            tempClient.addBooking(travelAgency, 1);
+            tempClient.addBooking(travelAgency, 2);
+            tempClient.addBooking(travelAgency, 3);
+            tempClient.printBooking();
+        waitNoClear();
+
+        cout << "Deletion of a booking:" << endl;
+
+            tempClient.deleteBooking(0);
+            tempClient.printBooking();
+    wait();
+
+    cout << "Add three planes to a booking:" << endl;
+
+            tempClient.addPlane(0,"AS1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.addPlane(0,"AF1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.addPlane(0,"AF1146", "23.08.2020", "CDG-WAW", "18:30-21:20", 130);
+            tempClient.printBooking();
+        waitNoClear();
+
+        cout << "Modify the plane (id = 0):" << endl;
+
+            tempClient.updatePlane(0, 0, "AS1146", "20.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.printBooking();
+        waitNoClear();
+
+        cout << "Deletion of a plane:" << endl;
+
+            tempClient.deletePlane(0, 0);
+            tempClient.printBooking();
+    wait();
+
+    cout << "Add three trains to a booking:" << endl;
+
+            tempClient.addTrain(0,"RGB-5288", "19.08.2020", "ANGERS-CDG", "5:00-7:30", 50);
+            tempClient.addTrain(0,"TGV-5288", "20.08.2020", "ANGERS-CDG", "5:00-7:30", 50);
+            tempClient.addTrain(0,"TGV-5467", "23.08.2020", "CDG-ANGERS", "22:00-00:20", 45);
+            tempClient.printBooking();
+        waitNoClear();
+
+        cout << "Modify the train (id = 0):" << endl;
+
+            tempClient.updateTrain(0, 0, "RGB-5288", "20.08.2020", "ANGERS-CDG", "5:00-7:30", 50);
+            tempClient.printBooking();
+        waitNoClear();
+
+        cout << "Deletion of a train:" << endl;
+
+            tempClient.deleteTrain(0, 0);
+            tempClient.printBooking();
     wait();
 
 

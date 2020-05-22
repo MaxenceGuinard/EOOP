@@ -8,15 +8,35 @@ using namespace std;
 class Train
 {
     public:
-        Train();
+        Train(string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+                void print();
+                void updateTrain(string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+        
         ~Train();       
 
-    protected:
+        // Getter
+
+            int getID();
+            double getPrice();
+
+        //
+
+        // Setter 
+
+            void setID(int id);
+
+        //
+
 
     private:
         int train_id;
-        string address;
-        string name;
+
+        string train_number_id; 
+        string date;
+        string a_to_b;
+        string ad_time;
+        
         double price;
 };
 #endif
