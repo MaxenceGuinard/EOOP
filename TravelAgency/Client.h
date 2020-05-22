@@ -12,7 +12,7 @@ class Client: public User
         ~Client();
 
         // Call by TravelAgency.cpp
-        void createClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void createClient(string _email, string _username, string _password, string _name, string _surname, string _address);
         void printClient();
 
         // Client functions (login need)

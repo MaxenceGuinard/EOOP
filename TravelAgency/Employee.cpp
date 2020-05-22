@@ -15,14 +15,14 @@ Employee::~Employee()
 }
 
 // Call by TravelAgency.cpp
-void Employee::createEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void Employee::createEmployee(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
-    email = initializer_email;
-    username = initializer_username;
-    password = initializer_password;
-    name = initializer_name;
-    surname = initializer_surname;
-    address = initializer_address; 
+    email = _email;
+    username = _username;
+    password = _password;
+    name = _name;
+    surname = _surname;
+    address = _address; 
     is_login = false;
 }
 
@@ -39,9 +39,38 @@ void Employee::printEmployee()
     void Employee::removeClient(){}
 
     // Travel functions
-    void Employee::createTravel(){}
-    void Employee::updateTravel(){}
-    void Employee::deleteTravel(){}
+    void Employee::createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price)
+    {
+        Travel travel(employee_id, _destination, _place_available, _start_date,_end_date,_duration,_price);
+        travel.setID(travelAgency->getTravelNbr());
+        travelAgency->pbTravel(travel);
+    }
+
+            void Employee::updateTravel(TravelAgency* travelAgency, int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price)
+            {
+                travelAgency->updateTravel(_travel_id, _destination, _place_available, _start_date, _end_date, _duration, _price);
+            }
+
+            // Hotel functions
+            void Employee::addHotel(TravelAgency* travelAgency, int _travel_id, string _address, string _name, double _price)
+            {
+                travelAgency->addHotel(_travel_id, _address, _name, _price);
+            }
+
+                void Employee::updateHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id, string _address, string _name, double _price)
+                {
+                    travelAgency->updateHotel(_travel_id, _hotel_id, _address, _name, _price);
+                }
+
+            void Employee::deleteHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id)
+            {
+                travelAgency->deleteHotel(_travel_id, _hotel_id);
+            }
+
+    void Employee::deleteTravel(TravelAgency* travelAgency, int _travel_id)
+    {
+        travelAgency->deleteTravel(_travel_id);
+    }
 
     void Employee::deleteAccount(TravelAgency* travelAgency)
     {

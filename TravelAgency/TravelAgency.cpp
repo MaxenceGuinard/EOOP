@@ -6,13 +6,14 @@
 #include <iostream>
 
 // Agency functions 
-TravelAgency::TravelAgency(string initializer_name, string initializer_address)
+TravelAgency::TravelAgency(string _name, string _address)
 {
-    name = initializer_name;
-	address = initializer_address;
+    name = _name;
+	address = _address;
 	employee_number = 0;
 	client_number = 0;
     superUser_number = 0;
+    travel_number = 0;
     bankrupt_flag = 0;
     addSuperUser("superuser@etravel.com", "admin", "password", "name", "surname", "Address");
 }
@@ -51,10 +52,10 @@ TravelAgency::~TravelAgency()
 }
 
 // SuperUser functions
-void TravelAgency::addSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void TravelAgency::addSuperUser(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
     SuperUser superUser;
-    superUser.createSuperUser(initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
+    superUser.createSuperUser(_email, _username, _password, _name, _surname, _address);
     superUser.setSUID(superUser_number);
     tab_superUser.push_back(superUser);
     superUser_number++;
@@ -93,10 +94,10 @@ void TravelAgency::addSuperUser(string initializer_email, string initializer_use
 
 // Employee functions
 
-void TravelAgency::addEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void TravelAgency::addEmployee(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
     Employee employee;
-    employee.createEmployee(initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
+    employee.createEmployee(_email, _username, _password, _name, _surname, _address);
     employee.setID(employee_number);
     tab_employee.push_back(employee);
     employee_number++;
@@ -151,6 +152,85 @@ void TravelAgency::addEmployee(string initializer_email, string initializer_user
             }
         }
 
+        // Travel functions
+        void TravelAgency::pbTravel(Travel travel)
+        {
+            tab_travel.push_back(travel);
+            travel_number++;
+        }
+
+        void TravelAgency::printTravel()
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                tab_travel[i].print();
+            }
+            
+        }
+
+        void TravelAgency::updateTravel(int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    tab_travel[i].updateTravel(_destination, _place_available, _start_date, _end_date, _duration, _price);
+                }    
+            }
+        }
+
+        void TravelAgency::deleteTravel(int _travel_id)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    tab_travel.erase(tab_travel.begin() + i);
+                }
+            }
+            travel_number--;
+
+            for (int i = 0; i < travel_number; i++)
+            {
+                tab_travel[i].setID(i);
+            }
+            
+        }
+
+        // Hotel functions
+        void TravelAgency::addHotel(int _travel_id, string _address, string _name, double _price)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    tab_travel[i].addHotel(_address, _name, _price);
+                }
+            }
+        }
+
+                void TravelAgency::updateHotel(int _travel_id, int _hotel_id, string _address, string _name, double _price)
+                {
+                    for (int i = 0; i < travel_number; i++)
+                    {
+                        if (tab_travel[i].getID() == _travel_id)
+                        {
+                            tab_travel[i].updateHotel(_hotel_id, _address, _name, _price);
+                        }
+                    }
+                }
+
+        void TravelAgency::deleteHotel(int _travel_id, int _hotel_id)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    tab_travel[i].deleteHotel(_hotel_id);
+                }
+            }  
+        }
+
 void TravelAgency::removeEmployee(int id)
 {
     for (int i = 0; i < employee_number; i++)
@@ -170,10 +250,10 @@ void TravelAgency::removeEmployee(int id)
 
 
 // Client functions
-void TravelAgency::addClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void TravelAgency::addClient(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
     Client client;
-    client.createClient(initializer_email, initializer_username, initializer_password, initializer_name, initializer_surname, initializer_address);
+    client.createClient(_email, _username, _password, _name, _surname, _address);
     client.setID(client_number);
     tab_client.push_back(client);
     client_number++;
@@ -247,7 +327,23 @@ void TravelAgency::removeClient(int id)
     }
 }
 
+// Getter
 
+    int TravelAgency::getTravelNbr()
+    {
+        return travel_number;
+    }
+
+//
+
+// Setter
+
+    void TravelAgency::setTravelNbr(int _travel_number)
+    {
+        travel_number = _travel_number;
+    }
+
+//
 
 
 

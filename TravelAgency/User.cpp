@@ -22,14 +22,14 @@ void User::login()
 }
 
     // Client help functions
-    void User::updateAccount(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+    void User::updateAccount(string _email, string _username, string _password, string _name, string _surname, string _address)
     {
-        email = initializer_email;
-        username = initializer_username;
-        password = initializer_password;
-        name = initializer_name;
-        surname = initializer_surname;
-        address = initializer_address; 
+        email = _email;
+        username = _username;
+        password = _password;
+        name = _name;
+        surname = _surname;
+        address = _address; 
     }
 
 void User::logout()

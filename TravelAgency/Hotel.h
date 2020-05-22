@@ -8,10 +8,25 @@ using namespace std;
 class Hotel
 {
     public:
-        Hotel();
+        Hotel(string _address, string _name, double _price);
+        
+            void print();
+            void update(string _address, string _name, double _price);
+        
         ~Hotel();       
 
-    protected:
+    // Getter
+
+        int getID();
+
+    //
+
+    // Setter
+
+        void setID(int _id);
+
+    //
+
 
     private:
         int hotel_id;

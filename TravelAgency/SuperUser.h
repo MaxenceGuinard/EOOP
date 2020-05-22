@@ -9,7 +9,7 @@ class SuperUser: public Employee
         SuperUser();
         ~SuperUser();
 
-        void createSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void createSuperUser(string _email, string _username, string _password, string _name, string _surname, string _address);
         void printSuperUser();
 
         // SuperUser functions (login need)

@@ -2,6 +2,7 @@
 #define EMPLOYEE_H
 
 #include "User.h"
+#include "Travel.h"
 
 class TravelAgency;
 
@@ -12,7 +13,7 @@ class Employee: public User
         ~Employee();
 
         // Call by TravelAgency.cpp
-        void createEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void createEmployee(string _email, string _username, string _password, string _name, string _surname, string _address);
         void printEmployee();
 
         
@@ -25,9 +26,24 @@ class Employee: public User
             void removeClient();
         
             // Travel functions
-            void createTravel();
-            void updateTravel();
-            void deleteTravel();
+            void createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price);
+                
+                void updateTravel(TravelAgency* travelAgency, int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price);
+                
+                // Hotel functions
+                void addHotel(TravelAgency* travelAgency, int _travel_id, string _address, string _name, double _price);
+                
+                    void updateHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id, string _address, string _name, double _price);
+
+                void deleteHotel(TravelAgency* travelAgency, int _travel_id, int _hotel_id);
+
+                // Plane functions
+                void addPlane(TravelAgency* travelAgency);
+
+                // Train functions
+                void addTrain();
+            
+            void deleteTravel(TravelAgency* travelAgency, int _travel_id);
 
             void deleteAccount(TravelAgency* travelAgency);
         

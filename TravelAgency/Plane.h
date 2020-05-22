@@ -8,15 +8,19 @@ using namespace std;
 class Plane
 {
     public:
-        Plane();
+        Plane(string _flight_id, string _day, string _start_airport, string _arriving_airport, string _start_time, string _arriving_time);
         ~Plane();       
 
     protected:
 
     private:
-        int plane_id;
-        string address;
-        string name;
+        string flight_id; 
+        string day;
+        string duration; 
+        string start_airport;
+        string arriving_airport;
+        string start_time;
+        string arriving_time;
         double price;
 };
 #endif

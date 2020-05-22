@@ -15,14 +15,14 @@ Client::~Client()
 }
 
 // Call by TravelAgency.cpp
-void Client::createClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address)
+void Client::createClient(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
-    email = initializer_email;
-    username = initializer_username;
-    password = initializer_password;
-    name = initializer_name;
-    surname = initializer_surname;
-    address = initializer_address; 
+    email = _email;
+    username = _username;
+    password = _password;
+    name = _name;
+    surname = _surname;
+    address = _address; 
     is_login = false;
 }
 

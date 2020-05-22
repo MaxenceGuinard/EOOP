@@ -12,7 +12,12 @@ void wait()
 {
     cin.get();
     system("clear");
-}    
+}
+
+void waitNoClear()
+{
+    cin.get();
+}
 
     Employee tempEmployee;
     Client tempClient;
@@ -69,11 +74,9 @@ int main()
         travelAgency->employeeLogin("1@etravel.com", "password");
         
             tempEmployee = travelAgency->returnEmployee();
-            tempEmployee.sayHello();
             travelAgency->setEmployee(tempEmployee);
-    
-        tempEmployee.logout();
 
+        tempEmployee.logout();
         travelAgency->printEmployee();
     wait();
 
@@ -81,7 +84,7 @@ int main()
         travelAgency->clientLogin("3@gmail.com", "password");
             
             tempClient = travelAgency->returnClient();
-            tempClient.updateAccount("3@gmail.com", "username", "password", "name3", "surname", "Address 3");
+            //tempClient.updateAccount("3@gmail.com", "username", "password", "name3", "surname", "Address 3");
             travelAgency->setClient(tempClient);
 
         tempClient.logout();
@@ -93,13 +96,55 @@ int main()
         travelAgency->superUserLogin("superuser@etravel.com", "password");
         
             tempSuperUser = travelAgency->returnSuperUser();
-            tempSuperUser.sayHello();
+            //
             travelAgency->setSuperUser(tempSuperUser);
     
         tempSuperUser.logout();
 
         travelAgency->printSuperUser();
     wait();
+
+    //Quand le client book faire une variable remoteness qui augmente le prix suivant la distance du client
+
+    cout << "Login to an employee to create four travel:" << endl;
+        travelAgency->employeeLogin("2@etravel.com", "password");
+        
+            tempEmployee = travelAgency->returnEmployee();
+            tempEmployee.createTravel(travelAgency, "New York",10, "22.05.2020", "28.05.2020", 144, 500);
+            tempEmployee.createTravel(travelAgency, "Warsaw", 35, "10.07.2020", "14.05.2020", 96, 250);
+            tempEmployee.createTravel(travelAgency, "Punta Cana",40, "10.07.2020", "16.07.2020", 144, 700);
+            tempEmployee.createTravel(travelAgency, "Paris", 40, "20.08.2020", "25.08.2020", 120, 750);
+            travelAgency->printTravel();
+        waitNoClear();
+
+        cout << "Modifying one travel travel (still connected with the same employee):" << endl;
+
+            tempEmployee.updateTravel(travelAgency, 0, "Monaco", 15, "22.05.2020", "28.05.2020", 96, 500);
+            travelAgency->printTravel();
+        waitNoClear();
+
+
+        cout << "Deletion of one travel:" << endl;
+
+            tempEmployee.deleteTravel(travelAgency, 1);
+            travelAgency->printTravel();
+    wait();
+    
+    cout << "Add four hotel in a travel (We are still connected with the employee):" << endl;
+
+            tempEmployee.addHotel(travelAgency, 2, "Paris", "Cinq étoiles", 120);
+            tempEmployee.addHotel(travelAgency, 2, "Paris", "Quatre étoiles", 96);
+            tempEmployee.addHotel(travelAgency, 2, "Paris", "Trois étoiles", 72);
+            tempEmployee.addHotel(travelAgency, 2, "Paris", "Deux étoiles", 48);
+            travelAgency->printTravel();
+        waitNoClear();
+
+        cout << "Deletion of one Hotel:" << endl;
+
+            tempEmployee.deleteHotel(travelAgency, 2, 1);
+            travelAgency->printTravel();
+    wait();
+
 
     cout << "Deletion of the travel agency:" << endl;
         travelAgency->bankrupt();

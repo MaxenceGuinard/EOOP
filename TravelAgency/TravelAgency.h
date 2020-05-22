@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "SuperUser.h"
+#include "Travel.h"
 
 class Employee;
 class Client;
@@ -15,7 +16,7 @@ class TravelAgency
 {
     public:
         // Agency functions
-        TravelAgency(string initializer_name, string initializer_address);
+        TravelAgency(string _name, string _address);
             
             void showAgencyDetails();
             void bankrupt();    
@@ -23,7 +24,7 @@ class TravelAgency
         ~TravelAgency();
 
         // SuperUser functions
-        void addSuperUser(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void addSuperUser(string _email, string _username, string _password, string _name, string _surname, string _address);
 
             void printSuperUser();
             void superUserLogin(string email, string password);
@@ -32,17 +33,32 @@ class TravelAgency
         //
         
         // Employee functions
-        void addEmployee(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void addEmployee(string _email, string _username, string _password, string _name, string _surname, string _address);
             
             void printEmployee();
             void employeeLogin(string email, string password);
             Employee returnEmployee();
             void setEmployee(Employee tempEmployee);
+
+            // Travel functions
+            void pbTravel(Travel travel);
+               
+                void printTravel();
+                void updateTravel(int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration, double _price);
+                
+                // Hotel functions
+                void addHotel(int _travel_id, string _address, string _name, double _price);
+
+                    void updateHotel(int _travel_id, int _hotel_id, string _address, string _name, double _price);
+
+                void deleteHotel(int _travel_id, int _hotel_id);
+
+            void deleteTravel(int _travel_id);
         
         void removeEmployee(int id);
          
         // Client functions
-        void addClient(string initializer_email, string initializer_username, string initializer_password, string initializer_name, string initializer_surname, string initializer_address);
+        void addClient(string _email, string _username, string _password, string _name, string _surname, string _address);
         
             void printClient();
             void clientLogin(string email, string password);
@@ -51,10 +67,23 @@ class TravelAgency
 
         void removeClient(int id);
 
+        // Getter
+
+            int getTravelNbr();
+
+        //
+
+        // Setter
+
+            void setTravelNbr(int _travel_number);
+
+        //
+
 
         vector<Employee> tab_employee;
         vector<Client> tab_client;
         vector<SuperUser> tab_superUser;
+        vector<Travel> tab_travel;
         
     protected:
 
@@ -66,6 +95,7 @@ class TravelAgency
         int employee_number;
         int client_number;
         int superUser_number;
+        int travel_number;
 
         int bankrupt_flag;
 
