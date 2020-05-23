@@ -13,7 +13,7 @@ Plane::Plane(string _flight_id, string _date, string _a_to_b, string _ad_time, d
 
         void Plane::print()
         {
-            cout << "       " << plane_id << "; " << flight_id << "; " << date << "; " << a_to_b << "; " << ad_time << "; " << price <<  endl;
+            cout << "       " << plane_id << "; " << flight_id << "; " << date << "; " << a_to_b << "; " << ad_time << "; " << price << "€" << endl;
         }
 
         void Plane::updatePlane(string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)

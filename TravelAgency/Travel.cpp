@@ -16,7 +16,7 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
 
         void Travel::print()
         {
-            cout << travel_id << "; " << destination << "; " << start_date << "; " << end_date << "; " << duration << "; " << price << "; " << place_available << "; " << creator_id << endl;
+            cout << travel_id << "; " << destination << "; " << start_date << " - " << end_date << "; " << duration << " d; " << price << "€; " << place_available << " p; " << creator_id << endl;
             printHotel();
         }
 
@@ -43,7 +43,7 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
                 {
                     if (hotel_number != 0)
                     {
-                        cout << travel_id << "; " <<"Hotel:" << endl;
+                        cout <<"Hotel:" << endl;
                         for (int i = 0; i < hotel_number; i++)
                         {
                             tab_hotel[i].print();
@@ -115,6 +115,16 @@ Travel::~Travel()
         return price;
     }
 
+    int Travel::getPlaceAvailable()
+    {
+        if (place_available != 0)
+        {
+            place_available--;
+        }
+        
+        return place_available;
+    }
+
 //
 
 // Setter
@@ -131,6 +141,11 @@ Travel::~Travel()
         {
             price = price + (tab_hotel[i].getNightNbr() * tab_hotel[i].getPrice());
         }
+    }
+
+    void Travel::setPlaceAvailable()
+    {
+        place_available++;
     }
 
 //

@@ -13,7 +13,7 @@ Train::Train(string _train_number_id, string _date, string _a_to_b, string _ad_t
 
         void Train::print()
         {
-            cout << "       " << train_id << "; " << train_number_id << "; " << date << "; " << a_to_b << "; " << ad_time << "; " << price <<  endl;
+            cout << "       " << train_id << "; " << train_number_id << "; " << date << "; " << a_to_b << "; " << ad_time << "; " << price << "€" <<  endl;
         }
 
         void Train::updateTrain(string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)

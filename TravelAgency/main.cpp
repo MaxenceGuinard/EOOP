@@ -7,11 +7,13 @@
 
 #include <unistd.h> // sleep
 #include <stdio.h>
-
+int count = 1;
 void wait()
 {
     cin.get();
     system("clear");
+    cout << count << ") ";
+    count++;
 }
 
 void waitNoClear()
@@ -27,6 +29,8 @@ int main()
 {
     system("clear");
 
+    cout << count << ") ";
+    count++;
     cout << "This program is made to emulate one travel agency website.\n" << endl;
     cout << "UNITS TESTS\nPress Enter to continue (Valid during the whole operation of the program)\n" << endl;
         wait();
@@ -84,7 +88,7 @@ int main()
         travelAgency->clientLogin("3@gmail.com", "password");
             
             tempClient = travelAgency->returnClient();
-            //tempClient.updateAccount("3@gmail.com", "username", "password", "name3", "surname", "Address 3");
+            tempClient.updateAccount("3@gmail.com", "username", "password", "name3", "surname", "Address 3");
             travelAgency->setClient(tempClient);
 
         tempClient.logout();
@@ -104,20 +108,21 @@ int main()
         travelAgency->printSuperUser();
     wait();
 
-    cout << "Login to an employee to create four travel:" << endl;
+    cout << "Login to an employee to create five travel:\n(d = day; p = place number; full right number = creator id)\n" << endl;
         travelAgency->employeeLogin("2@etravel.com", "password");
         
             tempEmployee = travelAgency->returnEmployee();
-            tempEmployee.createTravel(travelAgency, "New York",10, "22.05.2020", "28.05.2020", 6);
-            tempEmployee.createTravel(travelAgency, "Warsaw", 35, "10.07.2020", "14.05.2020", 4);
-            tempEmployee.createTravel(travelAgency, "Punta Cana",40, "10.07.2020", "16.07.2020", 6);
+            tempEmployee.createTravel(travelAgency, "New York", 10, "22.05.2020", "28.05.2020", 6);
+            tempEmployee.createTravel(travelAgency, "Alger", 35, "10.07.2020", "14.05.2020", 4);
+            tempEmployee.createTravel(travelAgency, "Tokyo", 40, "10.07.2020", "16.07.2020", 6);
             tempEmployee.createTravel(travelAgency, "Paris", 40, "20.08.2020", "23.08.2020", 3);
+            tempEmployee.createTravel(travelAgency, "Delhi", 0, "30.08.2020", "03.09.2020", 4);
             travelAgency->printTravel();
         waitNoClear();
 
         cout << "Modifying one travel (still connected with the same employee):" << endl;
 
-            tempEmployee.updateTravel(travelAgency, 0, "Monaco", 15, "22.05.2020", "28.05.2020", 96);
+            tempEmployee.updateTravel(travelAgency, 0, "Seoul", 15, "22.05.2020", "28.05.2020", 6);
             travelAgency->printTravel();
         waitNoClear();
 
@@ -130,10 +135,10 @@ int main()
     
     cout << "Add four hotel in a travel (We are still connected with the employee):" << endl;
 
-            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Cinq étoiles", 120);
-            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Quatre étoiles", 96);
-            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Trois étoiles", 72);
-            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "Deux étoiles", 48);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "5 étoiles", 120);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "4 étoiles", 96);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "3 étoiles", 72);
+            tempEmployee.addHotel(travelAgency, 2, 1, "Paris", "2 étoiles", 48);
             travelAgency->printTravel();
         waitNoClear();
 
@@ -143,10 +148,11 @@ int main()
             travelAgency->printTravel();
     wait();
 
-    cout << "Login to a client to book three travel:" << endl;
+    cout << "Login to a client to book four travel (with one not available):\n(first number is the travel_id; last number is the Boolean variable 'is_payed')\n" << endl;
         travelAgency->clientLogin("3@gmail.com", "password");
 
             tempClient = travelAgency->returnClient();
+            tempClient.addBooking(travelAgency, 0);
             tempClient.addBooking(travelAgency, 1);
             tempClient.addBooking(travelAgency, 2);
             tempClient.addBooking(travelAgency, 3);
@@ -161,41 +167,41 @@ int main()
 
     cout << "Add three planes to a booking:" << endl;
 
-            tempClient.addPlane(0,"AS1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
-            tempClient.addPlane(0,"AF1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
-            tempClient.addPlane(0,"AF1146", "23.08.2020", "CDG-WAW", "18:30-21:20", 130);
+            tempClient.addPlane(1,"AS1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 140);
+            tempClient.addPlane(1,"AF1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.addPlane(1,"AF1146", "23.08.2020", "CDG-WAW", "18:30-21:20", 130);
             tempClient.printBooking();
         waitNoClear();
 
         cout << "Modify the plane (id = 0):" << endl;
 
-            tempClient.updatePlane(0, 0, "AS1146", "20.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.updatePlane(1, 0, "AS1146", "20.08.2020", "WAW-CDG", "9:10-12:00", 150);
             tempClient.printBooking();
         waitNoClear();
 
         cout << "Deletion of a plane:" << endl;
 
-            tempClient.deletePlane(0, 0);
+            tempClient.deletePlane(1, 0);
             tempClient.printBooking();
     wait();
 
     cout << "Add three trains to a booking:" << endl;
 
-            tempClient.addTrain(0,"RGB-5288", "19.08.2020", "ANGERS-CDG", "5:00-7:30", 50);
-            tempClient.addTrain(0,"TGV-5288", "20.08.2020", "ANGERS-CDG", "5:00-7:30", 50);
-            tempClient.addTrain(0,"TGV-5467", "23.08.2020", "CDG-ANGERS", "22:00-00:20", 45);
+            tempClient.addTrain(1,"RGB-5288", "19.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
+            tempClient.addTrain(1,"HST-5288", "20.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
+            tempClient.addTrain(1,"HST-5467", "23.08.2020", "ANGERS-CDG", "15:00-17:20", 45);
             tempClient.printBooking();
         waitNoClear();
 
         cout << "Modify the train (id = 0):" << endl;
 
-            tempClient.updateTrain(0, 0, "RGB-5288", "20.08.2020", "ANGERS-CDG", "5:00-7:30", 50);
+            tempClient.updateTrain(1, 0, "RGB-5288", "20.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
             tempClient.printBooking();
         waitNoClear();
 
         cout << "Deletion of a train:" << endl;
 
-            tempClient.deleteTrain(0, 0);
+            tempClient.deleteTrain(1, 0);
             tempClient.printBooking();
     wait();
 

@@ -46,14 +46,21 @@ void Client::printClient()
 
         // Booking functions
         void Client::addBooking(TravelAgency* travelAgency, int _travel_id)
-        {
-            Booking booking(_travel_id);
-            travelAgency->addedBook(_travel_id);
-            booking.setTitle(travelAgency->returnBooking(_travel_id).getTitle());
-            booking.setTravelPrice(travelAgency->returnBooking(_travel_id).getPrice());
-            booking.setID(booking_number);
-            tab_booking.push_back(booking);
-            booking_number++;
+        {           
+            if (travelAgency->checkAvaibilityToBook(_travel_id))
+            {
+                Booking booking(_travel_id);
+                travelAgency->addedBook(_travel_id);
+                booking.setTitle(travelAgency->returnBooking(_travel_id).getTitle());
+                booking.setTravelPrice(travelAgency->returnBooking(_travel_id).getPrice());
+                booking.setID(booking_number);
+                tab_booking.push_back(booking);
+                booking_number++;
+            }
+            else
+            {
+                cout << "No more places available for the travel to " << travelAgency->returnBooking(_travel_id).getTitle() << endl;
+            }
         }
 
             void Client::printBooking()

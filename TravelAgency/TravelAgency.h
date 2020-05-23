@@ -66,6 +66,7 @@ class TravelAgency
             void setClient(Client tempClient);
 
             // Booking functions
+            bool checkAvaibilityToBook(int _travel_id);
             Travel returnBooking(int _travel_id);
             void addedBook(int _travel_id);
             void deletedBook(int _travel_id);

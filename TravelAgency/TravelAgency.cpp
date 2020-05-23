@@ -309,6 +309,22 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         }
 
         // Booking functions
+
+        bool TravelAgency::checkAvaibilityToBook(int _travel_id)
+        {
+            for (int i = 0; i < travel_number; i++)
+            {
+                if (tab_travel[i].getID() == _travel_id)
+                {
+                    if (tab_travel[i].getPlaceAvailable() != 0)
+                    {
+                        return true;
+                    }
+                }       
+            } 
+            return false;
+        }
+
         Travel TravelAgency::returnBooking(int _travel_id)
         {
             int a = 0;

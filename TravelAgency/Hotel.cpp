@@ -12,7 +12,7 @@ Hotel::Hotel(int _night_number, string _address, string _name, double _price)
 
         void Hotel::print()
         {
-            cout << "       " << hotel_id << "; " << night_number << "; " << name << "; " << address << "; " << price << endl;
+            cout << "       " << hotel_id << "; " << night_number << " n; " << name << "; " << address << "; " << price << "€ /n" <<  endl;
         }
 
         void Hotel::update(int _night_number, string _address, string _name, double _price)

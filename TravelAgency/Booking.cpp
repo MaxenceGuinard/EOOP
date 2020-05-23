@@ -17,7 +17,7 @@ Booking::Booking(int _travel_id)
 
         void Booking::print()
         {
-            cout << travel_id << "; " << booking_id << "; Trip in " << title << "; " << total_due << "; " << is_payed << endl;
+            cout << travel_id << "; " << booking_id << "; Trip in " << title << "; " << total_due << "€; " << is_payed << endl;
             printPlane();
             printTrain();            
         }
@@ -36,7 +36,7 @@ Booking::Booking(int _travel_id)
             {
                 if (plane_number != 0)
                 {
-                    cout << travel_id << "; " << "Plane:" << endl;
+                    cout << "Plane:" << endl;
                     for (int i = 0; i < plane_number; i++)
                     {
                         tab_plane[i].print();
@@ -88,7 +88,7 @@ Booking::Booking(int _travel_id)
             {
                 if (train_number != 0)
                 {
-                    cout << travel_id << "; " << "Train:" << endl;
+                    cout << "Train:" << endl;
                     for (int i = 0; i < train_number; i++)
                     {
                         tab_train[i].print();

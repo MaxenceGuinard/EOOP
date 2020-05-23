@@ -38,6 +38,7 @@ class Travel
             int getID();
             string getTitle();
             double getPrice();
+            int getPlaceAvailable();
 
         //
 
@@ -45,6 +46,7 @@ class Travel
 
             void setID(int id);
             void setPrice();
+            void setPlaceAvailable();
 
         //       
 
