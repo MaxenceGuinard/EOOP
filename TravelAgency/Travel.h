@@ -27,10 +27,6 @@ class Travel
 
             void deleteHotel(int _hotel_id);
 
-            // Booking functions
-            void addedBook();
-            void deletedBook();
-
         ~Travel();
 
         // Getter

@@ -81,17 +81,6 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
             setPrice();
         }
 
-        // Booking functions
-        void Travel::addedBook()
-        {
-
-        }
-
-        void Travel::deletedBook()
-        {
-
-        }
-
 Travel::~Travel()
 {
     

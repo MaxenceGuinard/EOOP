@@ -141,6 +141,11 @@ Booking::~Booking()
         return booking_id;
     }
 
+    int Booking::getClientID()
+    {
+        return client_id;
+    }
+
 // Setter
 
     void Booking::setID(int id)
@@ -184,6 +189,11 @@ Booking::~Booking()
         }
         
         setTotalDue();
+    }
+
+    void Booking::setClientID(int _client_id)
+    {
+        client_id = _client_id;
     }
 
 //

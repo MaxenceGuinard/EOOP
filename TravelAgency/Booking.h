@@ -41,6 +41,7 @@ class Booking
         // Getter
 
             int getID();
+            int getClientID();
         
         //
 
@@ -52,12 +53,14 @@ class Booking
             void setTravelPrice(double _price);
             void setPlanePrice();
             void setTrainPrice();
+            void setClientID(int _client_id);
         
         //
 
     private:
         int booking_id;
         int travel_id;
+        int client_id;
         string title;
 
         double total_due;

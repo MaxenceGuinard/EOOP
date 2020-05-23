@@ -156,53 +156,53 @@ int main()
             tempClient.addBooking(travelAgency, 1);
             tempClient.addBooking(travelAgency, 2);
             tempClient.addBooking(travelAgency, 3);
-            tempClient.printBooking();
+            tempClient.printBooking(travelAgency);
         waitNoClear();
 
         cout << "Deletion of a booking:" << endl;
 
-            tempClient.deleteBooking(0);
-            tempClient.printBooking();
+            tempClient.deleteBooking(travelAgency, 0);
+            tempClient.printBooking(travelAgency);
     wait();
 
     cout << "Add three planes to a booking:" << endl;
 
-            tempClient.addPlane(1,"AS1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 140);
-            tempClient.addPlane(1,"AF1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
-            tempClient.addPlane(1,"AF1146", "23.08.2020", "CDG-WAW", "18:30-21:20", 130);
-            tempClient.printBooking();
+            tempClient.addPlane(travelAgency, 1,"AS1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 140);
+            tempClient.addPlane(travelAgency, 1,"AF1146", "19.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.addPlane(travelAgency, 1,"AF1146", "23.08.2020", "CDG-WAW", "18:30-21:20", 130);
+            tempClient.printBooking(travelAgency);
         waitNoClear();
 
         cout << "Modify the plane (id = 0):" << endl;
 
-            tempClient.updatePlane(1, 0, "AS1146", "20.08.2020", "WAW-CDG", "9:10-12:00", 150);
-            tempClient.printBooking();
+            tempClient.updatePlane(travelAgency, 1, 0, "AS1146", "20.08.2020", "WAW-CDG", "9:10-12:00", 150);
+            tempClient.printBooking(travelAgency);
         waitNoClear();
 
         cout << "Deletion of a plane:" << endl;
 
-            tempClient.deletePlane(1, 0);
-            tempClient.printBooking();
+            tempClient.deletePlane(travelAgency, 1, 0);
+            tempClient.printBooking(travelAgency);
     wait();
 
     cout << "Add three trains to a booking:" << endl;
 
-            tempClient.addTrain(1,"RGB-5288", "19.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
-            tempClient.addTrain(1,"HST-5288", "20.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
-            tempClient.addTrain(1,"HST-5467", "23.08.2020", "ANGERS-CDG", "15:00-17:20", 45);
-            tempClient.printBooking();
+            tempClient.addTrain(travelAgency, 1,"RGB-5288", "19.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
+            tempClient.addTrain(travelAgency, 1,"HST-5288", "20.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
+            tempClient.addTrain(travelAgency, 1,"HST-5467", "23.08.2020", "ANGERS-CDG", "15:00-17:20", 45);
+            tempClient.printBooking(travelAgency);
         waitNoClear();
 
         cout << "Modify the train (id = 0):" << endl;
 
-            tempClient.updateTrain(1, 0, "RGB-5288", "20.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
-            tempClient.printBooking();
+            tempClient.updateTrain(travelAgency, 1, 0, "RGB-5288", "20.08.2020", "CDG-ANGERS", "13:00-15:30", 50);
+            tempClient.printBooking(travelAgency);
         waitNoClear();
 
         cout << "Deletion of a train:" << endl;
 
-            tempClient.deleteTrain(1, 0);
-            tempClient.printBooking();
+            tempClient.deleteTrain(travelAgency, 1, 0);
+            tempClient.printBooking(travelAgency);
     wait();
 
 

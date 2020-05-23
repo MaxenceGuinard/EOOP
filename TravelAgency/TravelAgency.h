@@ -6,6 +6,7 @@
 
 #include "SuperUser.h"
 #include "Travel.h"
+#include "Booking.h"
 
 class Employee;
 class Client;
@@ -63,13 +64,31 @@ class TravelAgency
             void printClient();
             void clientLogin(string email, string password);
             Client returnClient();
-            void setClient(Client tempClient);
+            void setClient(Client tempClient);            
 
             // Booking functions
-            bool checkAvaibilityToBook(int _travel_id);
-            Travel returnBooking(int _travel_id);
-            void addedBook(int _travel_id);
-            void deletedBook(int _travel_id);
+            void addBooking(int _client_id, int _travel_id);
+                
+                void printBooking(int _client_id);
+                bool checkAvaibilityToBook(int _travel_id);
+
+                // Plane functions
+                void addPlane(int _client_id, int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+                    void updatePlane(int _client_id, int _booking_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+                    
+                void deletePlane(int _client_id, int _booking_id, int _plane_id);
+
+                // Train functions
+                void addTrain(int _client_id, int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+                    void updateTrain(int _client_id, int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+
+                void deleteTrain(int _client_id, int _booking_id, int _train_id);
+
+            void deleteBooking(int _client_id, int _booking_id);
+
+
 
         void removeClient(int id);
 
@@ -91,6 +110,7 @@ class TravelAgency
         vector<Client> tab_client;
         vector<SuperUser> tab_superUser;
         vector<Travel> tab_travel;
+        vector<Booking> tab_booking;
         
     protected:
 
@@ -103,6 +123,7 @@ class TravelAgency
         int client_number;
         int superUser_number;
         int travel_number;
+        int booking_number;
 
         int bankrupt_flag;
 

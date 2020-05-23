@@ -47,113 +47,49 @@ void Client::printClient()
         // Booking functions
         void Client::addBooking(TravelAgency* travelAgency, int _travel_id)
         {           
-            if (travelAgency->checkAvaibilityToBook(_travel_id))
-            {
-                Booking booking(_travel_id);
-                travelAgency->addedBook(_travel_id);
-                booking.setTitle(travelAgency->returnBooking(_travel_id).getTitle());
-                booking.setTravelPrice(travelAgency->returnBooking(_travel_id).getPrice());
-                booking.setID(booking_number);
-                tab_booking.push_back(booking);
-                booking_number++;
-            }
-            else
-            {
-                cout << "No more places available for the travel to " << travelAgency->returnBooking(_travel_id).getTitle() << endl;
-            }
+            travelAgency->addBooking(client_id, _travel_id);
         }
 
-            void Client::printBooking()
+            void Client::printBooking(TravelAgency* travelAgency)
             {   
-                for (int i = 0; i < booking_number; i++)
-                {
-                    tab_booking[i].print();
-                }
+                travelAgency->printBooking(client_id); 
             }
             
             // Plane functions
-            void Client::addPlane(int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
+            void Client::addPlane(TravelAgency* travelAgency, int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
             {
-                for (int i = 0; i < booking_number; i++)
-                {
-                    if (tab_booking[i].getID() == _bookind_id)
-                    {
-                        tab_booking[i].addPlane(_flight_id, _date, _a_to_b, _ad_time, _price);
-                    }
-                }
+                travelAgency->addPlane(client_id, _bookind_id, _flight_id, _date, _a_to_b, _ad_time, _price);
             }
 
-                void Client::updatePlane(int _bookind_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
+                void Client::updatePlane(TravelAgency* travelAgency, int _bookind_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
                 {
-                    for (int i = 0; i < booking_number; i++)
-                    {
-                        if (tab_booking[i].getID() == _bookind_id)
-                        {
-                            tab_booking[i].updatePlane(_plane_id, _flight_id, _date, _a_to_b, _ad_time, _price);
-                        }  
-                    }
+                    travelAgency->updatePlane(client_id, _bookind_id, _plane_id, _flight_id, _date, _a_to_b, _ad_time, _price);
                 }
 
-            void Client::deletePlane(int _booking_id, int _plane_id)
+            void Client::deletePlane(TravelAgency* travelAgency, int _booking_id, int _plane_id)
             {
-                for (int i = 0; i < booking_number; i++)
-                {
-                    if (tab_booking[i].getID() == _booking_id)
-                    {
-                        tab_booking[i].deletePlane(_plane_id);
-                    }
-                }
+                travelAgency->deletePlane(client_id, _booking_id, _plane_id);
             }
 
             // Train functions
-            void Client::addTrain(int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
+            void Client::addTrain(TravelAgency* travelAgency, int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
             {
-                for (int i = 0; i < booking_number; i++)
-                {
-                    if (tab_booking[i].getID() == _bookind_id)
-                    {
-                        tab_booking[i].addTrain(_train_number_id, _date, _a_to_b, _ad_time, _price);
-                    }
-                }
+                travelAgency->addTrain(client_id, _bookind_id, _train_number_id, _date, _a_to_b, _ad_time, _price);
             }
 
-                void Client::updateTrain(int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
+                void Client::updateTrain(TravelAgency* travelAgency, int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
                 {
-                    for (int i = 0; i < booking_number; i++)
-                    {
-                        if (tab_booking[i].getID() == _bookind_id)
-                        {
-                            tab_booking[i].updatePlane(_train_id, _train_number_id, _date, _a_to_b, _ad_time, _price);
-                        }  
-                    }
+                    travelAgency->updateTrain(client_id, _bookind_id, _train_id, _train_number_id, _date, _a_to_b, _ad_time, _price);
                 }
 
-            void Client::deleteTrain(int _booking_id, int _train_id)
+            void Client::deleteTrain(TravelAgency* travelAgency, int _booking_id, int _train_id)
             {
-                for (int i = 0; i < booking_number; i++)
-                {
-                    if (tab_booking[i].getID() == _booking_id)
-                    {
-                        tab_booking[i].deleteTrain(_train_id);
-                    }
-                }
+                travelAgency->deleteTrain(client_id, _booking_id, _train_id);
             }
 
-        void Client::deleteBooking(int _booking_id)
+        void Client::deleteBooking(TravelAgency* travelAgency, int _booking_id)
         {
-            for (int i = 0; i < booking_number; i++)
-            {
-                if (tab_booking[i].getID() == _booking_id)
-                {
-                    tab_booking.erase(tab_booking.begin() + i);
-                }
-            }
-            booking_number--;
-
-            for (int i = 0; i < booking_number; i++)
-            {
-                tab_booking[i].setID(i);
-            }
+            travelAgency->deleteBooking(client_id, _booking_id);
         }
 //
 
@@ -174,6 +110,11 @@ void Client::printClient()
         return password;
     }
 
+    int Client::getBookingNumber()
+    {
+        return booking_number;
+    }
+
 //
 
 // Setter
@@ -183,4 +124,13 @@ void Client::printClient()
         client_id = id;
     }
 
+    void Client::setBookingNumberU()
+    {
+        booking_number++;
+    }
+
+    void Client::setBookingNumberL()
+    {
+        booking_number--;
+    }
 //
