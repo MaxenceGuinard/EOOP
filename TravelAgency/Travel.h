@@ -13,11 +13,13 @@ class Travel
     public:
         Travel(int _creator_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
         
-            void print();
+                void print();
+                void printForClient();
+                void errorBecauseTravelIsPublished();
 
                 void updateTravel(string _destination, int _place_available, string _start_date, string _end_date, double _duration);
                 
-            void deleteTravel();
+            //
 
             // Hotel functions
             void addHotel(int _night_number, string _address, string _name, double _price);
@@ -35,6 +37,7 @@ class Travel
             string getTitle();
             double getPrice();
             int getPlaceAvailable();
+            bool getIsPublished();
 
         //
 
@@ -43,6 +46,8 @@ class Travel
             void setID(int id);
             void setPrice();
             void setPlaceAvailable();
+            void setIsPublishedTrue();
+            void setIsPublishedFalse();
 
         //       
 
@@ -51,6 +56,8 @@ class Travel
         int creator_id;
         int hotel_number;
         int place_available;
+
+        bool is_published;
 
         string destination;
         string start_date;

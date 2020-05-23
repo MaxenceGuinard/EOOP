@@ -12,6 +12,7 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
     duration = _duration;
     hotel_number = 0;
     price = 0;
+    is_published = false;
 }
 
         void Travel::print()
@@ -19,24 +20,57 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
             cout << travel_id << "; " << destination << "; " << start_date << " - " << end_date << "; " << duration << " d; " << price << "€; " << place_available << " p; " << creator_id << endl;
             printHotel();
         }
+        
+        void Travel::printForClient()
+        {
+            if (!is_published)
+            {
+                cout << travel_id << "; " << destination << "; " << start_date << " - " << end_date << "; " << duration << " d; " << price << "€; " << place_available << " p; " << creator_id << endl;
+                printHotel();
+            }
+            else
+            {
+                errorBecauseTravelIsPublished();
+            }        
+        }
+
+        void Travel::errorBecauseTravelIsPublished()
+        {
+            cout << "Travel to " << destination << " cannot be modified because it is published.." << endl;
+        }
 
         void Travel::updateTravel(string _destination, int _place_available, string _start_date, string _end_date, double _duration)
         {
-            destination = _destination;
-            place_available = _place_available;
-            start_date = _start_date;
-            end_date = _end_date;
-            duration = _duration;
+            if (!is_published)
+            {
+                destination = _destination;
+                place_available = _place_available;
+                start_date = _start_date;
+                end_date = _end_date;
+                duration = _duration;
+            }
+            else
+            {
+                errorBecauseTravelIsPublished();
+            }
+            
         }
 
         // Hotel functions
         void Travel::addHotel(int _night_number, string _address, string _name, double _price)
         {
-            Hotel hotel(_night_number, _address, _name, _price);
-            hotel.setID(hotel_number);
-            tab_hotel.push_back(hotel);
-            hotel_number++;
-            setPrice();
+            if (!is_published)
+            {
+                Hotel hotel(_night_number, _address, _name, _price);
+                hotel.setID(hotel_number);
+                tab_hotel.push_back(hotel);
+                hotel_number++;
+                setPrice();
+            }
+            else
+            {
+                errorBecauseTravelIsPublished();
+            }
         }
 
                 void Travel::printHotel()
@@ -53,32 +87,46 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
 
             void Travel::updateHotel(int _hotel_id, int _night_number, string _address, string _name, double _price)
             {
-                for (int i = 0; i < hotel_number; i++)
+                if (!is_published)
                 {
-                    if (tab_hotel[i].getID() == _hotel_id)
+                    for (int i = 0; i < hotel_number; i++)
                     {
-                        tab_hotel[i].update(_night_number, _address, _name, _price);
-                        setPrice();
-                    }  
+                        if (tab_hotel[i].getID() == _hotel_id)
+                        {
+                            tab_hotel[i].update(_night_number, _address, _name, _price);
+                            setPrice();
+                        }  
+                    }
                 }
+                else
+                {
+                    errorBecauseTravelIsPublished();
+                }    
             }
 
         void Travel::deleteHotel(int _hotel_id)
         {
-            for (int i = 0; i < hotel_number; i++)
+            if (!is_published)
             {
-                if (tab_hotel[i].getID() == _hotel_id)
+                for (int i = 0; i < hotel_number; i++)
                 {
-                    tab_hotel.erase(tab_hotel.begin() + i);
+                    if (tab_hotel[i].getID() == _hotel_id)
+                    {
+                        tab_hotel.erase(tab_hotel.begin() + i);
+                    }
                 }
-            }
-            hotel_number--;
+                hotel_number--;
 
-            for (int i = 0; i < hotel_number; i++)
+                for (int i = 0; i < hotel_number; i++)
+                {
+                    tab_hotel[i].setID(i);
+                }
+                setPrice();
+                }
+            else
             {
-                tab_hotel[i].setID(i);
+                errorBecauseTravelIsPublished();
             }
-            setPrice();
         }
 
 Travel::~Travel()
@@ -114,6 +162,11 @@ Travel::~Travel()
         return place_available;
     }
 
+    bool Travel::getIsPublished()
+    {
+        return is_published;
+    }
+
 //
 
 // Setter
@@ -135,6 +188,24 @@ Travel::~Travel()
     void Travel::setPlaceAvailable()
     {
         place_available++;
+    }
+
+    void Travel::setIsPublishedTrue()
+    {
+        if (hotel_number != 0)
+        {
+            is_published = true;
+            cout << "Travel to " << destination << " successfully published.." << endl;
+        }
+        else
+        {
+            cout << "Travel to " << destination << " cannot be published because no hotel has been registered.." << endl;
+        }
+    }
+
+    void Travel::setIsPublishedFalse()
+    {
+        is_published = false;
     }
 
 //

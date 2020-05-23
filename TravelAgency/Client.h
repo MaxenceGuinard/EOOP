@@ -27,47 +27,51 @@ class Client: public User
 
             void showTravel(TravelAgency* travelAgency);
 
-            // Booking functions
-            void addBooking(TravelAgency* travelAgency, int _travel_id);
+        // Booking functions
+        void addBooking(TravelAgency* travelAgency, int _travel_id);
                 
-                void printBooking(TravelAgency* travelAgency);
+            void printBooking(TravelAgency* travelAgency);
+            void printAppliedBooking(TravelAgency* travelAgency);
+            void applied(TravelAgency* travelAgency, int _booking_id);
+            void unapplied(TravelAgency* travelAgency, int _booking_id);
 
-                // Plane functions
-                void addPlane(TravelAgency* travelAgency, int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+            // Plane functions
+            void addPlane(TravelAgency* travelAgency, int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
 
-                    void updatePlane(TravelAgency* travelAgency, int _booking_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
+                void updatePlane(TravelAgency* travelAgency, int _booking_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
                     
-                void deletePlane(TravelAgency* travelAgency, int _booking_id, int _plane_id);
+            void deletePlane(TravelAgency* travelAgency, int _booking_id, int _plane_id);
 
-                // Train functions
-                void addTrain(TravelAgency* travelAgency, int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+            // Train functions
+            void addTrain(TravelAgency* travelAgency, int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
 
-                    void updateTrain(TravelAgency* travelAgency, int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
+                void updateTrain(TravelAgency* travelAgency, int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
 
-                void deleteTrain(TravelAgency* travelAgency, int _booking_id, int _train_id);
+            void deleteTrain(TravelAgency* travelAgency, int _booking_id, int _train_id);
 
-            void deleteBooking(TravelAgency* travelAgency, int _booking_id);
+            // Payement functions
+            void pay(TravelAgency* travelAgency, int _booking_id);
+            void printPayment(TravelAgency* travelAgency);
 
-        //
+        void deleteBooking(TravelAgency* travelAgency, int _booking_id);
 
         // Getter
-            int getID();
-            string getEmail();
-            string getPassword();
-            int getBookingNumber();
-        //
+        int getID();
+        string getEmail();
+        string getPassword();
+        int getBookingNumber();
+        int getPaymentNumber();
 
         // Setter
-            void setID(int id);
-            void setBookingNumberU();
-            void setBookingNumberL();
-        //
-        
-    protected:
+        void setID(int id);
+
+        void setBookingNumber(int _booking_number);
+        void setPaymentNumber(int _payment_number);
 
     private:
         int client_id;
         int booking_number;
+        int payment_number;
 
 };
 

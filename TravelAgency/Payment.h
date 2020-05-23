@@ -8,19 +8,26 @@ using namespace std;
 class Payment
 {
     public:
-        Payment();
+        Payment(int _client_id, int _booking_id, double _amount);
+        
+            void print();
+        
         ~Payment();       
 
-        void addPayment();
-        void refundPayment();
-        void searchPayment();
+        // Getter
 
-    protected:
+        int getID();
+        int getClientID();
+        int getBookingID();
+        int getAmount();
 
+        // Setter
+
+        void setID(int id);
+    
     private:
         int payment_id;
         double amount;
-        string date;
         int booking_id;
         int client_id;
 };  

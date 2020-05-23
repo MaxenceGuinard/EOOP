@@ -7,6 +7,7 @@
 #include "SuperUser.h"
 #include "Travel.h"
 #include "Booking.h"
+#include "Payment.h"
 
 class Employee;
 class Client;
@@ -44,6 +45,8 @@ class TravelAgency
             // Travel functions
             void pbTravel(Travel travel);
                
+                void publishTravel(int _travel_id);
+                void unPublishTravel(int _travel_id);
                 void printTravel();
                 void updateTravel(int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
                 
@@ -69,8 +72,12 @@ class TravelAgency
             // Booking functions
             void addBooking(int _client_id, int _travel_id);
                 
+                void printTravelForClient();
                 void printBooking(int _client_id);
+                void printAppliedBooking(int _client_id);
                 bool checkAvaibilityToBook(int _travel_id);
+                void applied(int _client_id, int _booking_id);
+                void unapplied(int _client_id, int _booking_id);
 
                 // Plane functions
                 void addPlane(int _client_id, int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price);
@@ -85,6 +92,11 @@ class TravelAgency
                     void updateTrain(int _client_id, int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price);
 
                 void deleteTrain(int _client_id, int _booking_id, int _train_id);
+
+                // Payment functions
+                void createPayment(int _client_id, int _booking_id);
+                bool checkIfIsApplied(int _client_id, int _booking_id);
+                void printPayment(int _client_id);
 
             void deleteBooking(int _client_id, int _booking_id);
 
@@ -105,14 +117,11 @@ class TravelAgency
 
         //
 
+        void  printPaymenta();
+         
 
-        vector<Employee> tab_employee;
-        vector<Client> tab_client;
-        vector<SuperUser> tab_superUser;
-        vector<Travel> tab_travel;
-        vector<Booking> tab_booking;
         
-    protected:
+        
 
     private:
 
@@ -124,10 +133,16 @@ class TravelAgency
         int superUser_number;
         int travel_number;
         int booking_number;
+        int payment_number;
 
         int bankrupt_flag;
 
-        
+        vector<Employee> tab_employee;
+        vector<Client> tab_client;
+        vector<SuperUser> tab_superUser;
+        vector<Travel> tab_travel;
+        vector<Booking> tab_booking;
+        vector<Payment> tab_payment;
 
 };
 #endif

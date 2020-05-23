@@ -4,21 +4,27 @@
 #include "User.h"
 #include "Employee.h"
 #include "Client.h"
+#include "SuperUser.h"
 
 #include <unistd.h> // sleep
 #include <stdio.h>
+
 int count = 1;
+int sub_count = 1;
 void wait()
 {
     cin.get();
     system("clear");
     cout << count << ") ";
     count++;
-}
+    sub_count = 1;
+    }
 
 void waitNoClear()
 {
     cin.get();
+    cout << sub_count << ") ";
+    sub_count++;
 }
 
     Employee tempEmployee;
@@ -132,6 +138,11 @@ int main()
             tempEmployee.deleteTravel(travelAgency, 1);
             travelAgency->printTravel();
     wait();
+
+    cout << "Try to publish a travel without any hotel:" << endl;
+
+            tempEmployee.publishTravel(travelAgency, 2);
+    wait();
     
     cout << "Add four hotel in a travel (We are still connected with the employee):" << endl;
 
@@ -146,6 +157,22 @@ int main()
 
             tempEmployee.deleteHotel(travelAgency, 2, 1);
             travelAgency->printTravel();
+    wait();
+
+            tempEmployee.addHotel(travelAgency, 0, 6, "Seoul", "Hotel SEO", 70);
+            tempEmployee.addHotel(travelAgency, 1, 6, "Tokyo", "Hotel TOK", 110);
+            tempEmployee.addHotel(travelAgency, 3, 4, "Delhi", "Hotel DEL", 55);
+            tempEmployee.publishTravel(travelAgency, 0);
+            tempEmployee.publishTravel(travelAgency, 1);
+            tempEmployee.publishTravel(travelAgency, 3);
+            system("clear");
+
+    cout << "Try to publish a the travel to Paris:" << endl;
+
+            tempEmployee.publishTravel(travelAgency, 2);
+            
+            travelAgency->setEmployee(tempEmployee);
+            tempEmployee.logout();
     wait();
 
     cout << "Login to a client to book four travel (with one not available):\n(first number is the travel_id; last number is the Boolean variable 'is_payed')\n" << endl;
@@ -204,6 +231,48 @@ int main()
             tempClient.deleteTrain(travelAgency, 1, 0);
             tempClient.printBooking(travelAgency);
     wait();
+
+    cout << "Client applied the booking to Paris and show applied booking:" << endl;
+
+            tempClient.applied(travelAgency, 1);
+            tempClient.printAppliedBooking(travelAgency);
+    wait();
+    
+    cout << "Client pay the Paris booking:" << endl;
+
+            tempClient.pay(travelAgency, 1);
+            tempClient.printAppliedBooking(travelAgency);
+        waitNoClear();
+
+            tempClient.pay(travelAgency, 1);
+            tempClient.printAppliedBooking(travelAgency);
+        waitNoClear();
+
+            tempClient.unapplied(travelAgency, 1);
+            tempClient.pay(travelAgency, 1);
+            tempClient.printBooking(travelAgency);
+            tempClient.printPayment(travelAgency);
+
+    wait();
+
+            tempClient.applied(travelAgency, 1);
+            tempClient.pay(travelAgency, 1);
+            tempClient.printAppliedBooking(travelAgency);
+    wait();
+
+            tempClient.unapplied(travelAgency, 1);
+            tempClient.deletePlane(travelAgency, 1, 0);
+            tempClient.applied(travelAgency, 1);
+            tempClient.pay(travelAgency, 1);
+    wait();
+
+            tempClient.unapplied(travelAgency, 1);
+            tempClient.updatePlane(travelAgency, 1, 0,"AF1146", "23.08.2020", "CDG-WAW", "18:30-21:20", 150);
+            tempClient.applied(travelAgency, 1);
+            tempClient.pay(travelAgency, 1);
+            tempClient.printPayment(travelAgency);
+    wait();
+
 
 
     cout << "Deletion of the travel agency:" << endl;

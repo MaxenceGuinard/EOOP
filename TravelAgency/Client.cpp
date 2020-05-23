@@ -25,6 +25,7 @@ void Client::createClient(string _email, string _username, string _password, str
     address = _address; 
     is_login = false;
     booking_number = 0;
+    payment_number = 0;
 }
 
 void Client::printClient()
@@ -53,6 +54,21 @@ void Client::printClient()
             void Client::printBooking(TravelAgency* travelAgency)
             {   
                 travelAgency->printBooking(client_id); 
+            }
+
+            void Client::printAppliedBooking(TravelAgency* travelAgency)
+            {
+                travelAgency->printAppliedBooking(client_id);
+            }
+
+            void Client::applied(TravelAgency* travelAgency, int _booking_id)
+            {
+                travelAgency->applied(client_id, _booking_id);
+            }
+
+            void Client::unapplied(TravelAgency* travelAgency, int _booking_id)
+            {
+                travelAgency->unapplied(client_id, _booking_id);
             }
             
             // Plane functions
@@ -87,6 +103,24 @@ void Client::printClient()
                 travelAgency->deleteTrain(client_id, _booking_id, _train_id);
             }
 
+            // Payment functions
+            void Client::pay(TravelAgency* travelAgency, int _booking_id)
+            {
+                if (travelAgency->checkIfIsApplied(client_id, _booking_id))
+                {
+                    travelAgency->createPayment(client_id, _booking_id);
+                }
+                else
+                {
+                    cout << "Your booking is not applied.." << endl;
+                }
+            }
+
+            void Client::printPayment(TravelAgency* travelAgency)
+            {
+                travelAgency->printPayment(client_id);
+            }
+
         void Client::deleteBooking(TravelAgency* travelAgency, int _booking_id)
         {
             travelAgency->deleteBooking(client_id, _booking_id);
@@ -115,6 +149,11 @@ void Client::printClient()
         return booking_number;
     }
 
+    int Client::getPaymentNumber()
+    {
+        return payment_number;
+    }
+
 //
 
 // Setter
@@ -124,13 +163,13 @@ void Client::printClient()
         client_id = id;
     }
 
-    void Client::setBookingNumberU()
-    {
-        booking_number++;
+    void Client::setBookingNumber(int _booking_number)
+    {        
+        booking_number += _booking_number;
     }
 
-    void Client::setBookingNumberL()
+    void Client::setPaymentNumber(int _payment_number)
     {
-        booking_number--;
+        payment_number += _payment_number;
     }
 //

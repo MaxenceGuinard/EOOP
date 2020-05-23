@@ -46,6 +46,16 @@ void Employee::printEmployee()
         travelAgency->pbTravel(travel);
     }
 
+            void Employee::publishTravel(TravelAgency* travelAgency, int _travel_id)
+            {
+                travelAgency->publishTravel(_travel_id);
+            }
+
+            void Employee::unPublishTravel(TravelAgency* travelAgency, int _travel_id)
+            {
+                travelAgency->unPublishTravel(_travel_id);
+            }
+
             void Employee::updateTravel(TravelAgency* travelAgency, int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration)
             {
                 travelAgency->updateTravel(_travel_id, _destination, _place_available, _start_date, _end_date, _duration);

@@ -28,6 +28,8 @@ class Employee: public User
             // Travel functions
             void createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
                 
+                void publishTravel(TravelAgency* travelAgency, int _travel_id);
+                void unPublishTravel(TravelAgency* travelAgency, int _travel_id);
                 void updateTravel(TravelAgency* travelAgency, int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
                 
                 // Hotel functions

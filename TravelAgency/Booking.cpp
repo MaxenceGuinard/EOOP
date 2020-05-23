@@ -8,6 +8,7 @@ Booking::Booking(int _travel_id)
     title = "";
     total_due = 0;
     is_payed = false;
+    is_finished = false;
     plane_number = 0;
     train_number = 0;
     travel_price = 0;
@@ -25,11 +26,18 @@ Booking::Booking(int _travel_id)
         // Plane functions
         void Booking::addPlane(string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
         {
-            Plane plane(_flight_id, _date, _a_to_b, _ad_time, _price);
-            plane.setID(plane_number);
-            tab_plane.push_back(plane);
-            plane_number++;
-            setPlanePrice();
+            if (!is_finished)
+            {
+                Plane plane(_flight_id, _date, _a_to_b, _ad_time, _price);
+                plane.setID(plane_number);
+                tab_plane.push_back(plane);
+                plane_number++;
+                setPlanePrice();
+            }
+            else
+            {
+                cout << "Booking to " << title << " cannot be modified because you applied.." << endl;
+            }    
         }
 
             void Booking::printPlane()
@@ -46,42 +54,63 @@ Booking::Booking(int _travel_id)
 
             void Booking::updatePlane(int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
             {
-                for (int i = 0; i < plane_number; i++)
+                if (!is_finished)
                 {
-                    if (tab_plane[i].getID() == _plane_id)
+                    for (int i = 0; i < plane_number; i++)
                     {
-                        tab_plane[i].updatePlane(_flight_id, _date, _a_to_b, _ad_time, _price);
-                    } 
+                        if (tab_plane[i].getID() == _plane_id)
+                        {
+                            tab_plane[i].updatePlane(_flight_id, _date, _a_to_b, _ad_time, _price);
+                        } 
+                    }
+                    setPlanePrice();
                 }
-                setPlanePrice();
+                else
+                {
+                    cout << "Booking to " << title << " cannot be modified because you applied.." << endl;
+                }
             }
 
         void Booking::deletePlane(int _plane_id)
         {
-            for (int i = 0; i < plane_number; i++)
+            if (!is_finished)
             {
-                if (tab_plane[i].getID() == _plane_id)
+                for (int i = 0; i < plane_number; i++)
                 {
-                    tab_plane.erase(tab_plane.begin() + i);
+                    if (tab_plane[i].getID() == _plane_id)
+                    {
+                        tab_plane.erase(tab_plane.begin() + i);
+                    }
                 }
-            }
-            plane_number--;
+                plane_number--;
 
-            for (int i = 0; i < plane_number; i++)
+                for (int i = 0; i < plane_number; i++)
+                {
+                    tab_plane[i].setID(i);
+                }
+                setPlanePrice();
+                }
+            else
             {
-                tab_plane[i].setID(i);
+                cout << "Booking to " << title << " cannot be modified because you applied.." << endl;
             }
-            setPlanePrice();
         }
 
         // Train functions
         void Booking::addTrain(string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
         {
-            Train train(_train_number_id, _date, _a_to_b, _ad_time, _price);
-            train.setID(train_number);
-            tab_train.push_back(train);
-            train_number++;
-            setTrainPrice();
+            if (!is_finished)
+            {
+                Train train(_train_number_id, _date, _a_to_b, _ad_time, _price);
+                train.setID(train_number);
+                tab_train.push_back(train);
+                train_number++;
+                setTrainPrice();
+            }
+            else
+            {
+                cout << "Booking to " << title << " cannot be modified because you applied.." << endl;
+            }
         }
 
             void Booking::printTrain()
@@ -98,14 +127,21 @@ Booking::Booking(int _travel_id)
 
             void Booking::updateTrain(int _train_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
             {
-                for (int i = 0; i < train_number; i++)
+                if (!is_finished)
                 {
-                    if (tab_train[i].getID() == _train_id)
+                    for (int i = 0; i < train_number; i++)
                     {
-                        tab_train[i].updateTrain(_flight_id, _date, _a_to_b, _ad_time, _price);
+                        if (tab_train[i].getID() == _train_id)
+                        {
+                            tab_train[i].updateTrain(_flight_id, _date, _a_to_b, _ad_time, _price);
+                        } 
                     } 
-                } 
-                setTrainPrice();
+                    setTrainPrice();
+                    }
+                else
+                {
+                    cout << "Booking to " << title << " cannot be modified because you applied.." << endl;
+                }
             }
 
         void Booking::deleteTrain(int _train_id)
@@ -144,6 +180,31 @@ Booking::~Booking()
     int Booking::getClientID()
     {
         return client_id;
+    }
+
+    int Booking::getTravelID()
+    {
+        return travel_id;
+    }
+
+    bool Booking::getIsFinished()
+    {
+        return is_finished;
+    }
+
+    string Booking::getTitle()
+    {
+        return title;
+    }
+
+    double Booking::getTotalDue()
+    {
+        return total_due;
+    }
+
+    bool Booking::getIsPayed()
+    {
+        return is_payed;    
     }
 
 // Setter
@@ -194,6 +255,25 @@ Booking::~Booking()
     void Booking::setClientID(int _client_id)
     {
         client_id = _client_id;
+    }
+
+    void Booking::setIsFinished(bool _is_finished)
+    {
+        is_finished = _is_finished;
+        is_payed = false;
+        if (is_finished)
+        {
+            cout << "You applied your booking.." << endl;
+        }
+        else
+        {
+            cout << "You unapplied your booking.." << endl;
+        }        
+    }
+
+    void Booking::setIsPayed(bool _is_payed)
+    {
+        is_payed = _is_payed;
     }
 
 //

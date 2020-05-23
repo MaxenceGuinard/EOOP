@@ -42,6 +42,11 @@ class Booking
 
             int getID();
             int getClientID();
+            int getTravelID();
+            bool getIsFinished();
+            string getTitle();
+            double getTotalDue();
+            bool getIsPayed();
         
         //
 
@@ -54,6 +59,8 @@ class Booking
             void setPlanePrice();
             void setTrainPrice();
             void setClientID(int _client_id);
+            void setIsFinished(bool _is_finished);
+            void setIsPayed(bool _is_payed);
         
         //
 
@@ -68,6 +75,7 @@ class Booking
         double plane_price;
         double train_price;
         
+        bool is_finished;
         bool is_payed;
 
         int plane_number;
