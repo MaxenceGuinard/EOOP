@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-#include "SuperUser.h"
 #include "Travel.h"
 #include "Booking.h"
 #include "Payment.h"
 
+class SuperUser;
 class Employee;
 class Client;
 
@@ -115,13 +115,7 @@ class TravelAgency
 
             void setTravelNbr(int _travel_number);
 
-        //
-
-        void  printPaymenta();
-         
-
-        
-        
+        //      
 
     private:
 

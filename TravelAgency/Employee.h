@@ -21,9 +21,8 @@ class Employee: public User
         // Employee functions (login need)
 
             // Client help functions
-            void addClient();
-            void updateClient();
-            void removeClient();
+            void addClient(TravelAgency* travelAgency, string _email, string _username, string _password, string _name, string _surname, string _address);
+            void removeClient(TravelAgency* travelAgency, int _client_id);
         
             // Travel functions
             void createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration);
@@ -60,11 +59,6 @@ class Employee: public User
         // Setter
             void setID(int id);
         //
-
-
-        void sayHello();
-
-    protected:
 
     private:
         int employee_id;

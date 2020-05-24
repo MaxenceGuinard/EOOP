@@ -547,17 +547,16 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                                 {
                                     if (tab_payment[i].getClientID() == _client_id && tab_payment[i].getBookingID() == _booking_id)
                                     {
-                                        amount_paid += tab_payment[i].getAmount();
-                                        cout << "Test" << endl;                                 
+                                        amount_paid += tab_payment[i].getAmount();                             
                                     }
                                 }
-                                cout << "COUCOU " << amount_paid << endl;
                                 // Does the compagny refund the customer ?
                                 if (amount_paid > tab_booking[i].getTotalDue())
                                 {
                                     cout << "We will refund your " << amount_paid - tab_booking[i].getTotalDue() << "€ ASAP.." << endl;
                                     Payment payment(_client_id, _booking_id, tab_booking[i].getTotalDue() - amount_paid);
                                     payment.setID(tab_client[_client_id].getPaymentNumber());
+                                    payment.setIsRefund(true);
                                     tab_payment.push_back(payment);
                                     payment_number++;
                                 }
@@ -572,7 +571,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                                     payment.setID(tab_client[_client_id].getPaymentNumber());
                                     tab_payment.push_back(payment);
                                     payment_number++;
-                                    cout << "You paid " << tab_booking[i].getTotalDue() << "€ to go in " << tab_booking[i].getTitle() << ".." << endl;
+                                    cout << "You paid " << tab_booking[i].getTotalDue() - amount_paid << "€ to go in " << tab_booking[i].getTitle() << ".." << endl;
                                 }
                                 tab_booking[i].setIsPayed(true);         
                             }
@@ -598,6 +597,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
 
                 void TravelAgency::printPayment(int _client_id)
                 {
+                    cout << "payment:" << endl;
                     for (int i = 0; i < payment_number; i++)
                     {
                         if (tab_payment[i].getClientID() == _client_id)
@@ -609,17 +609,25 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
 
             void TravelAgency::deleteBooking(int _client_id, int _booking_id)
             {
+                int money_to_refund = 0;
                 for (int i = 0; i < booking_number; i++)
                 {
                     if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
                     {
-                        if (tab_booking[i].getIsPayed())
+                        for (int i = 0; i < payment_number; i++)
                         {
-                            cout << "We will contact you soon to refund your " << tab_booking[i].getTotalDue() << "€.." << endl;
+                            if (tab_payment[i].getClientID() == _client_id && tab_payment[i].getBookingID() == _booking_id && !tab_payment[i].getIsRefund())
+                            {
+                                money_to_refund += tab_payment[i].getAmount();
+                                tab_payment[i].setIsRefund(true);
+                            }
                         }
-                        
                         tab_booking.erase(tab_booking.begin() + i);
                     }                    
+                }
+                if (money_to_refund != 0)
+                {
+                    cout << "We will contact you soon to refund your " << money_to_refund << "€.." << endl;
                 }
                 booking_number--;
                 for (int i = 0; i < client_number; i++)

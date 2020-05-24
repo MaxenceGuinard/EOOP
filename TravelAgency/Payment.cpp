@@ -7,6 +7,7 @@ Payment::Payment(int _client_id, int _booking_id, double _amount)
     client_id = _client_id;
     booking_id = _booking_id;
     amount = _amount;
+    is_refund = false;
 }
 
         void Payment::print()
@@ -42,9 +43,19 @@ int Payment::getAmount()
     return amount;
 }
 
+bool Payment::getIsRefund()
+{
+    return is_refund;
+}
+
 // Setter
 
 void Payment::setID(int id)
 {
     payment_id = id;
+}
+
+void Payment::setIsRefund(bool _is_refund)
+{
+    is_refund = _is_refund;
 }

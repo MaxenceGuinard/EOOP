@@ -34,9 +34,15 @@ void Employee::printEmployee()
 // Employee functions (login need)
 
     // Client help functions
-    void Employee::addClient(){}
-    void Employee::updateClient(){}
-    void Employee::removeClient(){}
+    void Employee::addClient(TravelAgency* travelAgency, string _email, string _username, string _password, string _name, string _surname, string _address)
+    {
+        travelAgency->addClient( _email, _username, _password, _name, _surname, _address);
+    }
+
+    void Employee::removeClient(TravelAgency* travelAgency, int _client_id)
+    {
+        travelAgency->removeClient(_client_id);        
+    }
 
     // Travel functions
     void Employee::createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration)
@@ -113,13 +119,3 @@ void Employee::printEmployee()
         employee_id = id;
     }
 //
-
-
-
-
-void Employee::sayHello()
-{
-    cout << "Hello I'm " << name << endl;
-    name = "Maxence";
-    cout << "Hello I'm " << name << endl;
-}

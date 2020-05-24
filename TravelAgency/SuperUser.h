@@ -3,6 +3,8 @@
 
 #include "Employee.h"
 
+class TravelAgency;
+
 class SuperUser: public Employee
 {
     public:
@@ -14,7 +16,8 @@ class SuperUser: public Employee
 
         // SuperUser functions (login need)
 
-
+            void addEmployee(TravelAgency* travelAgency, string _email, string _username, string _password, string _name, string _surname, string _address);
+            void removeEmployee(TravelAgency* travelAgency, int _employee_id);
 
         //
 
@@ -23,8 +26,6 @@ class SuperUser: public Employee
             void setSUID(int id);
 
         //
-
-    protected:
 
     private:
         int superUser_id;
