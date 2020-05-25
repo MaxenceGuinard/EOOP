@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+// constructor
 Booking::Booking(int _travel_id)
 {
     travel_id = _travel_id;
@@ -16,6 +17,7 @@ Booking::Booking(int _travel_id)
     train_price = 0;
 }
 
+        // print all informations about the booking
         void Booking::print()
         {
             cout << travel_id << "; " << booking_id << "; Trip in " << title << "; " << total_due << "€; " << is_payed << endl;
@@ -24,9 +26,10 @@ Booking::Booking(int _travel_id)
         }
 
         // Plane functions
+        // add a plane in tab_plane 
         void Booking::addPlane(string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
         {
-            if (!is_finished)
+            if (!is_finished) // test if the booking gave been applied by the client
             {
                 Plane plane(_flight_id, _date, _a_to_b, _ad_time, _price);
                 plane.setID(plane_number);
@@ -39,7 +42,7 @@ Booking::Booking(int _travel_id)
                 cout << "Booking to " << title << " cannot be modified because you applied.." << endl;
             }    
         }
-
+            // print all the planes informations related to the booking
             void Booking::printPlane()
             {
                 if (plane_number != 0)
@@ -52,6 +55,7 @@ Booking::Booking(int _travel_id)
                 }
             }
 
+            // call the function updatePlane of the Plane class by searching the plane to modify in tab_plane
             void Booking::updatePlane(int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
             {
                 if (!is_finished)
@@ -71,6 +75,7 @@ Booking::Booking(int _travel_id)
                 }
             }
 
+        // delete one plane in the tab_plane
         void Booking::deletePlane(int _plane_id)
         {
             if (!is_finished)
@@ -97,6 +102,7 @@ Booking::Booking(int _travel_id)
         }
 
         // Train functions
+        // add a train in tab_train
         void Booking::addTrain(string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
         {
             if (!is_finished)
@@ -113,6 +119,7 @@ Booking::Booking(int _travel_id)
             }
         }
 
+            // print all the trains informations related to the booking
             void Booking::printTrain()
             {
                 if (train_number != 0)
@@ -125,6 +132,7 @@ Booking::Booking(int _travel_id)
                 }
             }
 
+            // call the function updateTrain of the Train class by searching the train to modify in tab_train
             void Booking::updateTrain(int _train_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
             {
                 if (!is_finished)
@@ -144,6 +152,7 @@ Booking::Booking(int _travel_id)
                 }
             }
 
+        // delete one train in the tab_train
         void Booking::deleteTrain(int _train_id)
         {
             for (int i = 0; i < train_number; i++)
@@ -162,9 +171,7 @@ Booking::Booking(int _travel_id)
             setTrainPrice();
         }
 
-        
-
-
+// destructor 
 Booking::~Booking()
 {
     
@@ -219,6 +226,7 @@ Booking::~Booking()
         title = _title;
     }
 
+    // compute the booking price
     void Booking::setTotalDue()
     {
         total_due = (travel_price + plane_price + train_price);
@@ -230,6 +238,7 @@ Booking::~Booking()
         setTotalDue();
     }
 
+    // compute the price of all the plane 
     void Booking::setPlanePrice()
     {
         plane_price = 0;
@@ -241,6 +250,8 @@ Booking::~Booking()
         setTotalDue();
     }
 
+
+    //compute the price of all the train 
     void Booking::setTrainPrice()
     {
         train_price = 0;

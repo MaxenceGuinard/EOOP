@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+// constructor
 Payment::Payment(int _client_id, int _booking_id, double _amount)
 {
     client_id = _client_id;
@@ -10,11 +11,13 @@ Payment::Payment(int _client_id, int _booking_id, double _amount)
     is_refund = false;
 }
 
+        // print all informations about the payment
         void Payment::print()
         {
             cout << client_id << "; " << booking_id << "; " << payment_id << "; " << amount << endl;
         }
 
+// destructor
 Payment::~Payment()
 {
     

@@ -6,6 +6,7 @@
 #include <iostream>
 
 // Agency functions 
+// constructor
 TravelAgency::TravelAgency(string _name, string _address)
 {
     name = _name;
@@ -19,7 +20,7 @@ TravelAgency::TravelAgency(string _name, string _address)
     bankrupt_flag = 0;
     addSuperUser("superuser@etravel.com", "admin", "password", "name", "surname", "Address");
 }
-
+        // display the compagny informations
         void TravelAgency::showAgencyDetails()
         {
             cout << "Name: ------------------- " << name << endl;
@@ -29,31 +30,38 @@ TravelAgency::TravelAgency(string _name, string _address)
             cout << "Number of SuperUser: ---- " << superUser_number << endl;
         }
 
+        // remove all the employee and client of the compagny
         void TravelAgency::bankrupt()
         {
             bankrupt_flag = 1;
-            int client_number_to_remove = client_number;
+            int client_number_to_remove = client_number;    // the two new int variables are created to save in memory the number of client / employee to remove
             int employee_number_to_remove = employee_number;
 
             for (int i = 0; i < client_number_to_remove; i++)
             {
                 removeClient(client_number - 1);
             }
+
+            cout << client_number_to_remove << " have been removed.." << endl; 
     
             for (int i = 0; i < employee_number_to_remove; i++)
             {
                 removeEmployee(employee_number - 1);
             }
 
+            cout << employee_number_to_remove << " have been removed.." << endl;
+
             this->~TravelAgency();
         }
 
+// destructor
 TravelAgency::~TravelAgency()
 {
     cout << "Travel agency succesfully deleted." << endl;
 }
 
 // SuperUser functions
+// add superSuper in tab_superUser
 void TravelAgency::addSuperUser(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
     SuperUser superUser;
@@ -61,13 +69,15 @@ void TravelAgency::addSuperUser(string _email, string _username, string _passwor
     superUser.setSUID(superUser_number);
     tab_superUser.push_back(superUser);
     superUser_number++;
-}
-
+}   
+        
+        // print the superUser
         void TravelAgency::printSuperUser()
         {
             tab_superUser[0].printSuperUser();
         }
 
+        // check if email and password of the superUser are correct. If yes then the superUser is login else error
         void TravelAgency::superUserLogin(string email, string password)
         {
             bool find_someone = false;
@@ -83,19 +93,21 @@ void TravelAgency::addSuperUser(string _email, string _username, string _passwor
             }
         }
 
+        // return the superUser (used in the main to copy object in the temp superUser)
         SuperUser TravelAgency::returnSuperUser()
         {
             return tab_superUser[0];
         }
         
+        // save the tempSuperUser after the logout
         void TravelAgency::setSuperUser(SuperUser tempSuperUser)
         {
             tab_superUser[0] = tempSuperUser;
         }
-//
+
 
 // Employee functions
-
+// create and add employee in tab_employee
 void TravelAgency::addEmployee(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
     Employee employee;
@@ -105,6 +117,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
     employee_number++;
 }
 
+        // print all the employee 
         void TravelAgency::printEmployee()
         {
             for (int i = 0; i < employee_number; i++)
@@ -113,6 +126,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }
         }
 
+        // connexion function for employee check if email/password match with one account. if yes login else error
         void TravelAgency::employeeLogin(string email, string password)
         {
             bool find_someone = false;
@@ -130,6 +144,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }
         }
 
+        // return the employee (used in the main to copy object in the temp employee)
         Employee TravelAgency::returnEmployee()
         {
             int a;
@@ -143,6 +158,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             return tab_employee[a];
         }
 
+        // save the employee after the logout
         void TravelAgency::setEmployee(Employee tempEmployee)
         {
             for (int i = 0; i < employee_number; i++)
@@ -155,12 +171,14 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         }
 
         // Travel functions
+        // push back created travel in tab_travel
         void TravelAgency::pbTravel(Travel travel)
         {
             tab_travel.push_back(travel);
             travel_number++;
         }
 
+        // search the travel by travel_id and publish it
         void TravelAgency::publishTravel(int _travel_id)
         {
             for (int i = 0; i < travel_number; i++)
@@ -172,6 +190,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }
         }
 
+        // search the travel by travel_id and unpublished it if nobody already booked it 
         void TravelAgency::unPublishTravel(int _travel_id)
         {
             int a = 0;
@@ -196,6 +215,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }  
         }
 
+        // print all the travel in tab_travel
         void TravelAgency::printTravel()
         {
             for (int i = 0; i < travel_number; i++)
@@ -204,6 +224,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }
         }
 
+        // update the travel according to travel_id
         void TravelAgency::updateTravel(int _travel_id, string _destination, int _place_available, string _start_date, string _end_date, double _duration)
         {
             for (int i = 0; i < travel_number; i++)
@@ -215,6 +236,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }
         }
 
+        // delete the travel in tab_travel according to the travel_id and set the travel_id of all the travel so that travel_id = row_number
         void TravelAgency::deleteTravel(int _travel_id)
         {
             for (int i = 0; i < travel_number; i++)
@@ -241,6 +263,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         }
 
         // Hotel functions
+        // add hotel in travel accorgding to the travel_id
         void TravelAgency::addHotel(int _travel_id, int _night_number, string _address, string _name, double _price)
         {
             for (int i = 0; i < travel_number; i++)
@@ -252,6 +275,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }
         }
 
+                // update hotel in travel according to travel_id and hotel_id
                 void TravelAgency::updateHotel(int _travel_id, int _hotel_id, int _night_number, string _address, string _name, double _price)
                 {
                     for (int i = 0; i < travel_number; i++)
@@ -263,6 +287,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
                     }
                 }
 
+        // delete hotel in travel according to travel_id and hotel_id
         void TravelAgency::deleteHotel(int _travel_id, int _hotel_id)
         {
             for (int i = 0; i < travel_number; i++)
@@ -274,6 +299,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             }  
         }
 
+// remove employee in tab_employee according to the employee_id and then put all employee_id = row_number
 void TravelAgency::removeEmployee(int id)
 {
     for (int i = 0; i < employee_number; i++)
@@ -293,6 +319,7 @@ void TravelAgency::removeEmployee(int id)
 
 
 // Client functions
+// add client in tab_client 
 void TravelAgency::addClient(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
     Client client;
@@ -302,6 +329,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
     client_number++;
 }
 
+        // print the published travels in tab_travel
         void TravelAgency::printTravelForClient()
         {
             for (int i = 0; i < travel_number; i++)
@@ -310,6 +338,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
             }
         }
 
+        // print all the client in tab_client
         void TravelAgency::printClient()
         {   
             for (int i = 0; i < client_number; i++)
@@ -318,6 +347,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
             }
         }
 
+        // connexion function for client check if email/password match with one account. if yes login else error
         void TravelAgency::clientLogin(string email, string password)
         {
             bool find_someone = false;
@@ -335,6 +365,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
             }
         }
 
+        // return the client (used in the main to copy object in the temp client) 
         Client TravelAgency::returnClient()
         {
             int a;
@@ -348,6 +379,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
             return tab_client[a];
         }
 
+        // save the client after the logout
         void TravelAgency::setClient(Client tempClient)
         {
             for (int i = 0; i < client_number; i++)
@@ -360,6 +392,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         }      
 
         // Booking functions
+        // add booking in tab_booking by checking if the travel is published and if there is still some available places
         void TravelAgency::addBooking(int _client_id, int _travel_id)
         {
             if (tab_travel[_travel_id].getIsPublished())
@@ -400,7 +433,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
             }
         }
         
-                
+                // print all the booking made by a client according to the client_id
                 void TravelAgency::printBooking(int _client_id)
                 {
                     for (int i = 0; i < booking_number;i++)
@@ -412,6 +445,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }    
                 }
 
+                // print all the applied booking of a client according to client_id
                 void TravelAgency::printAppliedBooking(int _client_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -423,6 +457,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }
                 }
 
+                // return the avaibility of a travel by checking the place number
                 bool TravelAgency::checkAvaibilityToBook(int _travel_id)
                         {
                             for (int i = 0; i < travel_number; i++)
@@ -437,7 +472,8 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                             } 
                             return false;
                         }
-
+                
+                // function to applied client booking according to the client_id and the booking_id
                 void TravelAgency::applied(int _client_id, int _booking_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -449,6 +485,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }
                 }
 
+                // function to unapplied client booking according to the client_id and the booking_id
                 void TravelAgency::unapplied(int _client_id, int _booking_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -461,6 +498,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 }
 
                 // Plane functions
+                // add a plane in tab_plane in a booking 
                 void TravelAgency::addPlane(int _client_id, int _bookind_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -472,6 +510,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }
                 }
 
+                        // update a plane in tab_plane according to the client_id the booking_id and the plane_id
                         void TravelAgency::updatePlane(int _client_id, int _booking_id, int _plane_id, string _flight_id, string _date, string _a_to_b, string _ad_time, double _price)
                         {
                             for (int i = 0; i < booking_number; i++)
@@ -483,6 +522,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                             }                            
                         }
                     
+                // delete a plane in tab_plane according to the client_id the booking_id and the plane_id 
                 void TravelAgency::deletePlane(int _client_id, int _booking_id, int _plane_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -495,6 +535,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 }
 
                 // Train functions
+                // add a train in tab_train in a booking 
                 void TravelAgency::addTrain(int _client_id, int _bookind_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -506,6 +547,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }
                 }
 
+                        // update a train in tab_train according to the client_id the booking_id and the train_id
                         void TravelAgency::updateTrain(int _client_id, int _bookind_id, int _train_id, string _train_number_id, string _date, string _a_to_b, string _ad_time, double _price)
                         {
                             for (int i = 0; i < booking_number; i++)
@@ -519,6 +561,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                             
                         }
 
+                // delete a train in tab_train according to the client_id the booking_id and the train_id
                 void TravelAgency::deleteTrain(int _client_id, int _booking_id, int _train_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -531,6 +574,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 }
 
                 // Payment functions
+                // add a payment in tab_payment 
                 void TravelAgency::createPayment(int _client_id, int _booking_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -542,7 +586,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                             if (!tab_booking[i].getIsPayed())
                             {
                                 double amount_paid = 0;
-                                // Function to compute the amount paid
+                                // Function to compute the amount already paid
                                 for (int i = 0; i < payment_number; i++)
                                 {
                                     if (tab_payment[i].getClientID() == _client_id && tab_payment[i].getBookingID() == _booking_id)
@@ -556,15 +600,16 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                                     cout << "We will refund your " << amount_paid - tab_booking[i].getTotalDue() << "€ ASAP.." << endl;
                                     Payment payment(_client_id, _booking_id, tab_booking[i].getTotalDue() - amount_paid);
                                     payment.setID(tab_client[_client_id].getPaymentNumber());
-                                    payment.setIsRefund(true);
                                     tab_payment.push_back(payment);
                                     payment_number++;
                                 }
+                                // is the travel already paid 
                                 else if (amount_paid == tab_booking[i].getTotalDue())
                                 {
                                     
                                     cout << "Nothing to do, you already paid " << amount_paid << "€ for the trip to " << tab_booking[i].getTitle() << ".." << endl;
                                 }
+                                // the new due
                                 else
                                 {
                                     Payment payment(_client_id, _booking_id, tab_booking[i].getTotalDue() - amount_paid);
@@ -583,6 +628,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }
                 }
 
+                // check if the booking is applied 
                 bool TravelAgency::checkIfIsApplied(int _client_id, int _booking_id)
                 {
                     for (int i = 0; i < booking_number; i++)
@@ -595,6 +641,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     return false;
                 }
 
+                // print all the payment in tab_payment
                 void TravelAgency::printPayment(int _client_id)
                 {
                     cout << "payment:" << endl;
@@ -607,9 +654,11 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     }
                 }
 
+            // delete a booking in tab_booking acording to the client_id and the booking_id and then set booking_id = row_number(where row_number correspond with the number of booking for each client)
+            // it check if the client already paid and will refund the client 
             void TravelAgency::deleteBooking(int _client_id, int _booking_id)
             {
-                int money_to_refund = 0;
+                int money_to_refund = 0; // money_to_refund will take the value of all the payment line according to the booking_id and the client_id
                 for (int i = 0; i < booking_number; i++)
                 {
                     if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
@@ -634,7 +683,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     if (tab_client[i].getID() == _client_id)
                     {
-                        tab_client[i].setBookingNumber(-1);
+                        tab_client[i].setBookingNumber(-1); // modify the booking_number according to the client_id
                     } 
                 }
                 int a = 0;
@@ -648,7 +697,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 }
             }
         
-
+// remove client from tab_client and set the client_id = row_number
 void TravelAgency::removeClient(int id)
 {
 
@@ -684,11 +733,3 @@ void TravelAgency::removeClient(int id)
     }
 
 //
-
-
-
-
-
-
-
-

@@ -19,11 +19,7 @@ class User
             void updateAccount(string _email, string _username, string _password, string _name, string _surname, string _address);
 
         void logout();
-
-
-
-        
-        
+   
         bool isLogin();
 
     protected:
