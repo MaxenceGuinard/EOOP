@@ -42,14 +42,14 @@ TravelAgency::TravelAgency(string _name, string _address)
                 removeClient(client_number - 1);
             }
 
-            cout << client_number_to_remove << " have been removed.." << endl; 
+            cout << client_number_to_remove << " clients have been removed.." << endl; 
     
             for (int i = 0; i < employee_number_to_remove; i++)
             {
                 removeEmployee(employee_number - 1);
             }
 
-            cout << employee_number_to_remove << " have been removed.." << endl;
+            cout << employee_number_to_remove << " employees have been removed.." << endl;
 
             this->~TravelAgency();
         }
