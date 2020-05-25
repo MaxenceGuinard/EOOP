@@ -66,7 +66,7 @@ class Travel
         double duration;
         double price;
         
-        vector<Hotel> tab_hotel;
+        vector<Hotel*> tab_hotel;
 
 };
 #endif

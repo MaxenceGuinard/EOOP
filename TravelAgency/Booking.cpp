@@ -31,8 +31,8 @@ Booking::Booking(int _travel_id)
         {
             if (!is_finished) // test if the booking gave been applied by the client
             {
-                Plane plane(_flight_id, _date, _a_to_b, _ad_time, _price);
-                plane.setID(plane_number);
+                Plane* plane = new Plane(_flight_id, _date, _a_to_b, _ad_time, _price);
+                plane->setID(plane_number);
                 tab_plane.push_back(plane);
                 plane_number++;
                 setPlanePrice();
@@ -50,7 +50,7 @@ Booking::Booking(int _travel_id)
                     cout << "Plane:" << endl;
                     for (int i = 0; i < plane_number; i++)
                     {
-                        tab_plane[i].print();
+                        tab_plane[i]->print();
                     }
                 }
             }
@@ -62,9 +62,9 @@ Booking::Booking(int _travel_id)
                 {
                     for (int i = 0; i < plane_number; i++)
                     {
-                        if (tab_plane[i].getID() == _plane_id)
+                        if (tab_plane[i]->getID() == _plane_id)
                         {
-                            tab_plane[i].updatePlane(_flight_id, _date, _a_to_b, _ad_time, _price);
+                            tab_plane[i]->updatePlane(_flight_id, _date, _a_to_b, _ad_time, _price);
                         } 
                     }
                     setPlanePrice();
@@ -82,7 +82,7 @@ Booking::Booking(int _travel_id)
             {
                 for (int i = 0; i < plane_number; i++)
                 {
-                    if (tab_plane[i].getID() == _plane_id)
+                    if (tab_plane[i]->getID() == _plane_id)
                     {
                         tab_plane.erase(tab_plane.begin() + i);
                     }
@@ -91,7 +91,7 @@ Booking::Booking(int _travel_id)
 
                 for (int i = 0; i < plane_number; i++)
                 {
-                    tab_plane[i].setID(i);
+                    tab_plane[i]->setID(i);
                 }
                 setPlanePrice();
                 }
@@ -107,8 +107,8 @@ Booking::Booking(int _travel_id)
         {
             if (!is_finished)
             {
-                Train train(_train_number_id, _date, _a_to_b, _ad_time, _price);
-                train.setID(train_number);
+                Train* train = new Train(_train_number_id, _date, _a_to_b, _ad_time, _price);
+                train->setID(train_number);
                 tab_train.push_back(train);
                 train_number++;
                 setTrainPrice();
@@ -127,7 +127,7 @@ Booking::Booking(int _travel_id)
                     cout << "Train:" << endl;
                     for (int i = 0; i < train_number; i++)
                     {
-                        tab_train[i].print();
+                        tab_train[i]->print();
                     }
                 }
             }
@@ -139,9 +139,9 @@ Booking::Booking(int _travel_id)
                 {
                     for (int i = 0; i < train_number; i++)
                     {
-                        if (tab_train[i].getID() == _train_id)
+                        if (tab_train[i]->getID() == _train_id)
                         {
-                            tab_train[i].updateTrain(_flight_id, _date, _a_to_b, _ad_time, _price);
+                            tab_train[i]->updateTrain(_flight_id, _date, _a_to_b, _ad_time, _price);
                         } 
                     } 
                     setTrainPrice();
@@ -157,7 +157,7 @@ Booking::Booking(int _travel_id)
         {
             for (int i = 0; i < train_number; i++)
             {
-                if (tab_train[i].getID() == _train_id)
+                if (tab_train[i]->getID() == _train_id)
                 {
                     tab_train.erase(tab_train.begin() + i);
                 }
@@ -166,7 +166,7 @@ Booking::Booking(int _travel_id)
 
             for (int i = 0; i < train_number; i++)
             {
-                tab_train[i].setID(i);
+                tab_train[i]->setID(i);
             }
             setTrainPrice();
         }
@@ -244,7 +244,7 @@ Booking::~Booking()
         plane_price = 0;
         for (int i = 0; i < plane_number; i++)
         {
-            plane_price = plane_price + tab_plane[i].getPrice();
+            plane_price = plane_price + tab_plane[i]->getPrice();
         }
         
         setTotalDue();
@@ -257,7 +257,7 @@ Booking::~Booking()
         train_price = 0;
         for (int i = 0; i < train_number; i++)
         {
-            train_price = train_price + tab_train[i].getPrice();
+            train_price = train_price + tab_train[i]->getPrice();
         }
         
         setTotalDue();

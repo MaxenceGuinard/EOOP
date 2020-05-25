@@ -53,8 +53,8 @@ void Employee::printEmployee()
     // call the function pbTravel in TravelAgency to push_back the new travel in the tab_Travel
     void Employee::createTravel(TravelAgency* travelAgency, string _destination, int _place_available, string _start_date, string _end_date, double _duration)
     {
-        Travel travel(employee_id, _destination, _place_available, _start_date,_end_date,_duration);
-        travel.setID(travelAgency->getTravelNbr());
+        Travel* travel = new Travel(employee_id, _destination, _place_available, _start_date,_end_date,_duration);
+        travel->setID(travelAgency->getTravelNbr());
         travelAgency->pbTravel(travel);
     }
 

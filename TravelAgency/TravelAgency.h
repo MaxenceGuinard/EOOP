@@ -30,8 +30,8 @@ class TravelAgency
 
             void printSuperUser();
             void superUserLogin(string email, string password);
-            SuperUser returnSuperUser();
-            void setSuperUser(SuperUser tempSuperUser);
+            SuperUser* returnSuperUser();
+            void setSuperUser(SuperUser* tempSuperUser);
         //
         
         // Employee functions
@@ -39,11 +39,11 @@ class TravelAgency
             
             void printEmployee();
             void employeeLogin(string email, string password);
-            Employee returnEmployee();
-            void setEmployee(Employee tempEmployee);
+            Employee* returnEmployee();
+            void setEmployee(Employee* tempEmployee);
 
             // Travel functions
-            void pbTravel(Travel travel);
+            void pbTravel(Travel* travel);
                
                 void publishTravel(int _travel_id);
                 void unPublishTravel(int _travel_id);
@@ -66,8 +66,8 @@ class TravelAgency
         
             void printClient();
             void clientLogin(string email, string password);
-            Client returnClient();
-            void setClient(Client tempClient);            
+            Client* returnClient();
+            void setClient(Client* tempClient);            
 
             // Booking functions
             void addBooking(int _client_id, int _travel_id);
@@ -131,12 +131,12 @@ class TravelAgency
 
         int bankrupt_flag;
 
-        vector<Employee> tab_employee;
-        vector<Client> tab_client;
-        vector<SuperUser> tab_superUser;
-        vector<Travel> tab_travel;
-        vector<Booking> tab_booking;
-        vector<Payment> tab_payment;
+        vector<Employee*> tab_employee;
+        vector<Client*> tab_client;
+        vector<SuperUser*> tab_superUser;
+        vector<Travel*> tab_travel;
+        vector<Booking*> tab_booking;
+        vector<Payment*> tab_payment;
 
 };
 #endif

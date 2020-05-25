@@ -81,8 +81,8 @@ class Booking
         int plane_number;
         int train_number;
 
-        vector<Plane> tab_plane;
-        vector<Train> tab_train;
+        vector<Plane*> tab_plane;
+        vector<Train*> tab_train;
 
 };
 #endif

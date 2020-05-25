@@ -63,8 +63,8 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
         {
             if (!is_published)
             {
-                Hotel hotel(_night_number, _address, _name, _price);
-                hotel.setID(hotel_number);
+                Hotel* hotel = new Hotel(_night_number, _address, _name, _price);
+                hotel->setID(hotel_number);
                 tab_hotel.push_back(hotel);
                 hotel_number++;
                 setPrice();
@@ -83,7 +83,7 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
                         cout <<"Hotel:" << endl;
                         for (int i = 0; i < hotel_number; i++)
                         {
-                            tab_hotel[i].print();
+                            tab_hotel[i]->print();
                         }
                     }
                 }
@@ -95,9 +95,9 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
                 {
                     for (int i = 0; i < hotel_number; i++)
                     {
-                        if (tab_hotel[i].getID() == _hotel_id)
+                        if (tab_hotel[i]->getID() == _hotel_id)
                         {
-                            tab_hotel[i].update(_night_number, _address, _name, _price);
+                            tab_hotel[i]->update(_night_number, _address, _name, _price);
                             setPrice();
                         }  
                     }
@@ -115,7 +115,7 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
             {
                 for (int i = 0; i < hotel_number; i++)
                 {
-                    if (tab_hotel[i].getID() == _hotel_id)
+                    if (tab_hotel[i]->getID() == _hotel_id)
                     {
                         tab_hotel.erase(tab_hotel.begin() + i);
                     }
@@ -124,7 +124,7 @@ Travel::Travel(int _creator_id, string _destination, int _place_available, strin
 
                 for (int i = 0; i < hotel_number; i++)
                 {
-                    tab_hotel[i].setID(i);
+                    tab_hotel[i]->setID(i);
                 }
                 setPrice();
                 }
@@ -189,7 +189,7 @@ Travel::~Travel()
         price = 0;
         for (int i = 0; i < hotel_number; i++)
         {
-            price = price + (tab_hotel[i].getNightNbr() * tab_hotel[i].getPrice());
+            price = price + (tab_hotel[i]->getNightNbr() * tab_hotel[i]->getPrice());
         }
     }
 

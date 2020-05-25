@@ -64,9 +64,9 @@ TravelAgency::~TravelAgency()
 // add superSuper in tab_superUser
 void TravelAgency::addSuperUser(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
-    SuperUser superUser;
-    superUser.createSuperUser(_email, _username, _password, _name, _surname, _address);
-    superUser.setSUID(superUser_number);
+    SuperUser* superUser = new SuperUser();
+    superUser->createSuperUser(_email, _username, _password, _name, _surname, _address);
+    superUser->setSUID(superUser_number);
     tab_superUser.push_back(superUser);
     superUser_number++;
 }   
@@ -74,16 +74,16 @@ void TravelAgency::addSuperUser(string _email, string _username, string _passwor
         // print the superUser
         void TravelAgency::printSuperUser()
         {
-            tab_superUser[0].printSuperUser();
+            tab_superUser[0]->printSuperUser();
         }
 
         // check if email and password of the superUser are correct. If yes then the superUser is login else error
         void TravelAgency::superUserLogin(string email, string password)
         {
             bool find_someone = false;
-            if (tab_superUser[0].getEmail() == email && tab_superUser[0].getPassword() == password)
+            if (tab_superUser[0]->getEmail() == email && tab_superUser[0]->getPassword() == password)
             {
-                tab_superUser[0].login();
+                tab_superUser[0]->login();
                 find_someone = true;        
             }        
         
@@ -94,13 +94,13 @@ void TravelAgency::addSuperUser(string _email, string _username, string _passwor
         }
 
         // return the superUser (used in the main to copy object in the temp superUser)
-        SuperUser TravelAgency::returnSuperUser()
+        SuperUser* TravelAgency::returnSuperUser()
         {
             return tab_superUser[0];
         }
         
         // save the tempSuperUser after the logout
-        void TravelAgency::setSuperUser(SuperUser tempSuperUser)
+        void TravelAgency::setSuperUser(SuperUser* tempSuperUser)
         {
             tab_superUser[0] = tempSuperUser;
         }
@@ -110,9 +110,9 @@ void TravelAgency::addSuperUser(string _email, string _username, string _passwor
 // create and add employee in tab_employee
 void TravelAgency::addEmployee(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
-    Employee employee;
-    employee.createEmployee(_email, _username, _password, _name, _surname, _address);
-    employee.setID(employee_number);
+    Employee* employee = new Employee();
+    employee->createEmployee(_email, _username, _password, _name, _surname, _address);
+    employee->setID(employee_number);
     tab_employee.push_back(employee);
     employee_number++;
 }
@@ -122,7 +122,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < employee_number; i++)
             {
-                tab_employee[i].printEmployee();
+                tab_employee[i]->printEmployee();
             }
         }
 
@@ -132,9 +132,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             bool find_someone = false;
             for (int i = 0; i < employee_number; i++)
             {
-                if (tab_employee[i].getEmail() == email && tab_employee[i].getPassword() == password)
+                if (tab_employee[i]->getEmail() == email && tab_employee[i]->getPassword() == password)
                 {
-                    tab_employee[i].login();
+                    tab_employee[i]->login();
                     find_someone = true;        
                 }        
             }
@@ -145,12 +145,12 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         }
 
         // return the employee (used in the main to copy object in the temp employee)
-        Employee TravelAgency::returnEmployee()
+        Employee* TravelAgency::returnEmployee()
         {
             int a;
             for (int i = 0; i < employee_number; i++)
             {
-                if (tab_employee[i].isLogin())
+                if (tab_employee[i]->isLogin())
                 {
                     a = i;
                 }
@@ -159,11 +159,11 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         }
 
         // save the employee after the logout
-        void TravelAgency::setEmployee(Employee tempEmployee)
+        void TravelAgency::setEmployee(Employee* tempEmployee)
         {
             for (int i = 0; i < employee_number; i++)
             {
-                if (tab_employee[i].getID() == tempEmployee.getID() && tab_employee[i].isLogin())
+                if (tab_employee[i]->getID() == tempEmployee->getID() && tab_employee[i]->isLogin())
                 {
                     tab_employee[i] = tempEmployee;
                 } 
@@ -172,7 +172,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
 
         // Travel functions
         // push back created travel in tab_travel
-        void TravelAgency::pbTravel(Travel travel)
+        void TravelAgency::pbTravel(Travel* travel)
         {
             tab_travel.push_back(travel);
             travel_number++;
@@ -183,9 +183,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < travel_number; i++)
             {
-                if (tab_travel[i].getID() == _travel_id)
+                if (tab_travel[i]->getID() == _travel_id)
                 {
-                    tab_travel[i].setIsPublishedTrue();
+                    tab_travel[i]->setIsPublishedTrue();
                 }
             }
         }
@@ -196,7 +196,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
             int a = 0;
             for (int i = 0; i < booking_number; i++)
             {
-                if (tab_booking[i].getTravelID() == _travel_id)
+                if (tab_booking[i]->getTravelID() == _travel_id)
                 {
                     a++;
                 }
@@ -204,9 +204,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
 
             for (int i = 0; i < travel_number; i++)
             {
-                if (tab_travel[i].getID() == _travel_id && a == 0)
+                if (tab_travel[i]->getID() == _travel_id && a == 0)
                 {
-                    tab_travel[i].setIsPublishedFalse();
+                    tab_travel[i]->setIsPublishedFalse();
                 }
                 else
                 {
@@ -220,7 +220,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < travel_number; i++)
             {
-                tab_travel[i].print();
+                tab_travel[i]->print();
             }
         }
 
@@ -229,9 +229,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < travel_number; i++)
             {
-                if (tab_travel[i].getID() == _travel_id)
+                if (tab_travel[i]->getID() == _travel_id)
                 {
-                    tab_travel[i].updateTravel(_destination, _place_available, _start_date, _end_date, _duration);
+                    tab_travel[i]->updateTravel(_destination, _place_available, _start_date, _end_date, _duration);
                 }    
             }
         }
@@ -241,15 +241,15 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < travel_number; i++)
             {
-                if (tab_travel[i].getID() == _travel_id)
+                if (tab_travel[i]->getID() == _travel_id)
                 {
-                    if (!tab_travel[i].getIsPublished())
+                    if (!tab_travel[i]->getIsPublished())
                     {
                         tab_travel.erase(tab_travel.begin() + i);
                     }
                     else
                     {
-                        cout << "Travel to " << tab_travel[i].getTitle() << " is published.." << endl;
+                        cout << "Travel to " << tab_travel[i]->getTitle() << " is published.." << endl;
                     }
                 }
             }
@@ -257,7 +257,7 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
 
             for (int i = 0; i < travel_number; i++)
             {
-                tab_travel[i].setID(i);
+                tab_travel[i]->setID(i);
             }
             
         }
@@ -268,9 +268,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < travel_number; i++)
             {
-                if (tab_travel[i].getID() == _travel_id)
+                if (tab_travel[i]->getID() == _travel_id)
                 {
-                    tab_travel[i].addHotel(_night_number, _address, _name, _price);
+                    tab_travel[i]->addHotel(_night_number, _address, _name, _price);
                 }
             }
         }
@@ -280,9 +280,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
                 {
                     for (int i = 0; i < travel_number; i++)
                     {
-                        if (tab_travel[i].getID() == _travel_id)
+                        if (tab_travel[i]->getID() == _travel_id)
                         {
-                            tab_travel[i].updateHotel(_hotel_id, _night_number, _address, _name, _price);
+                            tab_travel[i]->updateHotel(_hotel_id, _night_number, _address, _name, _price);
                         }
                     }
                 }
@@ -292,9 +292,9 @@ void TravelAgency::addEmployee(string _email, string _username, string _password
         {
             for (int i = 0; i < travel_number; i++)
             {
-                if (tab_travel[i].getID() == _travel_id)
+                if (tab_travel[i]->getID() == _travel_id)
                 {
-                    tab_travel[i].deleteHotel(_hotel_id);
+                    tab_travel[i]->deleteHotel(_hotel_id);
                 }
             }  
         }
@@ -304,7 +304,7 @@ void TravelAgency::removeEmployee(int id)
 {
     for (int i = 0; i < employee_number; i++)
     {
-        if(tab_employee[i].getID() == id)
+        if(tab_employee[i]->getID() == id)
         {
             tab_employee.erase(tab_employee.begin() + i);
         }
@@ -313,7 +313,7 @@ void TravelAgency::removeEmployee(int id)
     
     for (int i = id; i < employee_number; i++)
     {
-        tab_employee[i].setID(i);
+        tab_employee[i]->setID(i);
     }
 }
 
@@ -322,9 +322,9 @@ void TravelAgency::removeEmployee(int id)
 // add client in tab_client 
 void TravelAgency::addClient(string _email, string _username, string _password, string _name, string _surname, string _address)
 {
-    Client client;
-    client.createClient(_email, _username, _password, _name, _surname, _address);
-    client.setID(client_number);
+    Client* client = new Client();
+    client->createClient(_email, _username, _password, _name, _surname, _address);
+    client->setID(client_number);
     tab_client.push_back(client);
     client_number++;
 }
@@ -334,7 +334,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         {
             for (int i = 0; i < travel_number; i++)
             {
-                tab_travel[i].printForClient();
+                tab_travel[i]->printForClient();
             }
         }
 
@@ -343,7 +343,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         {   
             for (int i = 0; i < client_number; i++)
             {
-            tab_client[i].printClient();
+            tab_client[i]->printClient();
             }
         }
 
@@ -353,9 +353,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
             bool find_someone = false;
             for (int i = 0; i < client_number; i++)
             {
-                if (tab_client[i].getEmail() == email && tab_client[i].getPassword() == password)
+                if (tab_client[i]->getEmail() == email && tab_client[i]->getPassword() == password)
                 {
-                    tab_client[i].login();
+                    tab_client[i]->login();
                     find_someone = true;
                 }
             }
@@ -366,12 +366,12 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         }
 
         // return the client (used in the main to copy object in the temp client) 
-        Client TravelAgency::returnClient()
+        Client* TravelAgency::returnClient()
         {
             int a;
             for (int i = 0; i < client_number; i++)
             {
-                if (tab_client[i].isLogin())
+                if (tab_client[i]->isLogin())
                 {
                     a = i;
                 }
@@ -380,11 +380,11 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         }
 
         // save the client after the logout
-        void TravelAgency::setClient(Client tempClient)
+        void TravelAgency::setClient(Client* tempClient)
         {
             for (int i = 0; i < client_number; i++)
             {
-                if (tab_client[i].getID() == tempClient.getID())
+                if (tab_client[i]->getID() == tempClient->getID())
                 {
                     tab_client[i] = tempClient;
                 }
@@ -395,26 +395,26 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
         // add booking in tab_booking by checking if the travel is published and if there is still some available places
         void TravelAgency::addBooking(int _client_id, int _travel_id)
         {
-            if (tab_travel[_travel_id].getIsPublished())
+            if (tab_travel[_travel_id]->getIsPublished())
             {                   
                 if (checkAvaibilityToBook(_travel_id))
                 {           
-                    Booking booking(_travel_id);
-                    booking.setClientID(_client_id);
+                    Booking* booking = new Booking(_travel_id);
+                    booking->setClientID(_client_id);
                     for (int i = 0; i < client_number; i++)
                     {
-                        if (tab_client[i].getID() == _client_id)
+                        if (tab_client[i]->getID() == _client_id)
                         {
-                            booking.setID(tab_client[i].getBookingNumber());
-                            tab_client[i].setBookingNumber(1);
+                            booking->setID(tab_client[i]->getBookingNumber());
+                            tab_client[i]->setBookingNumber(1);
                         }            
                     }
                     for (int i = 0; i < travel_number; i++)
                     {
-                        if (tab_travel[i].getID() == _travel_id)
+                        if (tab_travel[i]->getID() == _travel_id)
                         {
-                            booking.setTravelPrice(tab_travel[i].getPrice());
-                            booking.setTitle(tab_travel[i].getTitle());
+                            booking->setTravelPrice(tab_travel[i]->getPrice());
+                            booking->setTitle(tab_travel[i]->getTitle());
                         }
                     }
                     tab_booking.push_back(booking);
@@ -424,9 +424,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < travel_number; i++)
                     {
-                        if (tab_travel[i].getID() == _travel_id)
+                        if (tab_travel[i]->getID() == _travel_id)
                         {
-                            cout << "No more places available for the travel to " << tab_travel[i].getTitle() << endl;
+                            cout << "No more places available for the travel to " << tab_travel[i]->getTitle() << endl;
                         } 
                     }     
                 } 
@@ -438,9 +438,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number;i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id)
+                        if (tab_booking[i]->getClientID() == _client_id)
                         {
-                            tab_booking[i].print();
+                            tab_booking[i]->print();
                         }
                     }    
                 }
@@ -450,9 +450,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getIsFinished())
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getIsFinished())
                         {
-                            tab_booking[i].print();
+                            tab_booking[i]->print();
                         }
                     }
                 }
@@ -462,9 +462,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                         {
                             for (int i = 0; i < travel_number; i++)
                             {
-                                if (tab_travel[i].getID() == _travel_id)
+                                if (tab_travel[i]->getID() == _travel_id)
                                 {   
-                                    if (tab_travel[i].getPlaceAvailable() != 0)
+                                    if (tab_travel[i]->getPlaceAvailable() != 0)
                                     {
                                         return true;
                                     }
@@ -478,9 +478,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                         {
-                            tab_booking[i].setIsFinished(true);
+                            tab_booking[i]->setIsFinished(true);
                         }
                     }
                 }
@@ -490,9 +490,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                         {
-                            tab_booking[i].setIsFinished(false);
+                            tab_booking[i]->setIsFinished(false);
                         }
                     }
                 }
@@ -503,9 +503,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _bookind_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _bookind_id)
                         {
-                            tab_booking[i].addPlane(_flight_id, _date, _a_to_b, _ad_time, _price);
+                            tab_booking[i]->addPlane(_flight_id, _date, _a_to_b, _ad_time, _price);
                         }
                     }
                 }
@@ -515,9 +515,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                         {
                             for (int i = 0; i < booking_number; i++)
                             {
-                                if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                                if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                                 {
-                                    tab_booking[i].updatePlane(_plane_id, _flight_id, _date, _a_to_b, _ad_time, _price);
+                                    tab_booking[i]->updatePlane(_plane_id, _flight_id, _date, _a_to_b, _ad_time, _price);
                                 }
                             }                            
                         }
@@ -527,9 +527,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                         {
-                            tab_booking[i].deletePlane(_plane_id);
+                            tab_booking[i]->deletePlane(_plane_id);
                         }
                     }
                 }
@@ -540,9 +540,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _bookind_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _bookind_id)
                         {
-                            tab_booking[i].addTrain(_train_number_id, _date, _a_to_b, _ad_time, _price);
+                            tab_booking[i]->addTrain(_train_number_id, _date, _a_to_b, _ad_time, _price);
                         }
                     }
                 }
@@ -552,9 +552,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                         {
                             for (int i = 0; i < booking_number; i++)
                             {
-                                if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _bookind_id)
+                                if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _bookind_id)
                                 {
-                                    tab_booking[i].updateTrain(_train_id, _train_number_id, _date, _a_to_b, _ad_time, _price);
+                                    tab_booking[i]->updateTrain(_train_id, _train_number_id, _date, _a_to_b, _ad_time, _price);
                                 }
                                 
                             }
@@ -566,9 +566,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                         {
-                            tab_booking[i].deleteTrain(_train_id);
+                            tab_booking[i]->deleteTrain(_train_id);
                         }                      
                     }                  
                 }
@@ -580,49 +580,49 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     for (int i = 0; i < booking_number; i++)
                     {   
                         // Select the booking made by the client
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                         {   
                             // In case if the client try to paid a second time (without any booking modification)
-                            if (!tab_booking[i].getIsPayed())
+                            if (!tab_booking[i]->getIsPayed())
                             {
                                 double amount_paid = 0;
                                 // Function to compute the amount already paid
                                 for (int i = 0; i < payment_number; i++)
                                 {
-                                    if (tab_payment[i].getClientID() == _client_id && tab_payment[i].getBookingID() == _booking_id)
+                                    if (tab_payment[i]->getClientID() == _client_id && tab_payment[i]->getBookingID() == _booking_id)
                                     {
-                                        amount_paid += tab_payment[i].getAmount();                             
+                                        amount_paid += tab_payment[i]->getAmount();                             
                                     }
                                 }
                                 // Does the compagny refund the customer ?
-                                if (amount_paid > tab_booking[i].getTotalDue())
+                                if (amount_paid > tab_booking[i]->getTotalDue())
                                 {
-                                    cout << "We will refund your " << amount_paid - tab_booking[i].getTotalDue() << "€ ASAP.." << endl;
-                                    Payment payment(_client_id, _booking_id, tab_booking[i].getTotalDue() - amount_paid);
-                                    payment.setID(tab_client[_client_id].getPaymentNumber());
+                                    cout << "We will refund your " << amount_paid - tab_booking[i]->getTotalDue() << "€ ASAP.." << endl;
+                                    Payment* payment = new Payment(_client_id, _booking_id, tab_booking[i]->getTotalDue() - amount_paid);
+                                    payment->setID(payment_number);
                                     tab_payment.push_back(payment);
                                     payment_number++;
                                 }
                                 // is the travel already paid 
-                                else if (amount_paid == tab_booking[i].getTotalDue())
+                                else if (amount_paid == tab_booking[i]->getTotalDue())
                                 {
                                     
-                                    cout << "Nothing to do, you already paid " << amount_paid << "€ for the trip to " << tab_booking[i].getTitle() << ".." << endl;
+                                    cout << "Nothing to do, you already paid " << amount_paid << "€ for the trip to " << tab_booking[i]->getTitle() << ".." << endl;
                                 }
                                 // the new due
                                 else
                                 {
-                                    Payment payment(_client_id, _booking_id, tab_booking[i].getTotalDue() - amount_paid);
-                                    payment.setID(tab_client[_client_id].getPaymentNumber());
+                                    Payment* payment = new Payment(_client_id, _booking_id, tab_booking[i]->getTotalDue() - amount_paid);
+                                    payment->setID(payment_number);
                                     tab_payment.push_back(payment);
                                     payment_number++;
-                                    cout << "You paid " << tab_booking[i].getTotalDue() - amount_paid << "€ to go in " << tab_booking[i].getTitle() << ".." << endl;
+                                    cout << "You paid " << tab_booking[i]->getTotalDue() - amount_paid << "€ to go in " << tab_booking[i]->getTitle() << ".." << endl;
                                 }
-                                tab_booking[i].setIsPayed(true);         
+                                tab_booking[i]->setIsPayed(true);         
                             }
                             else
                             {
-                                cout << "You already paid to go in " << tab_booking[i].getTitle() << ".." << endl; 
+                                cout << "You already paid to go in " << tab_booking[i]->getTitle() << ".." << endl; 
                             }       
                         }
                     }
@@ -633,7 +633,7 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 {
                     for (int i = 0; i < booking_number; i++)
                     {
-                        if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id && tab_booking[i].getIsFinished())
+                        if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id && tab_booking[i]->getIsFinished())
                         {
                             return true;
                         }
@@ -647,9 +647,9 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                     cout << "payment:" << endl;
                     for (int i = 0; i < payment_number; i++)
                     {
-                        if (tab_payment[i].getClientID() == _client_id)
+                        if (tab_payment[i]->getClientID() == _client_id)
                         {
-                            tab_payment[i].print();
+                            tab_payment[i]->print();
                         }
                     }
                 }
@@ -661,14 +661,14 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 int money_to_refund = 0; // money_to_refund will take the value of all the payment line according to the booking_id and the client_id
                 for (int i = 0; i < booking_number; i++)
                 {
-                    if (tab_booking[i].getClientID() == _client_id && tab_booking[i].getID() == _booking_id)
+                    if (tab_booking[i]->getClientID() == _client_id && tab_booking[i]->getID() == _booking_id)
                     {
                         for (int i = 0; i < payment_number; i++)
                         {
-                            if (tab_payment[i].getClientID() == _client_id && tab_payment[i].getBookingID() == _booking_id && !tab_payment[i].getIsRefund())
+                            if (tab_payment[i]->getClientID() == _client_id && tab_payment[i]->getBookingID() == _booking_id && !tab_payment[i]->getIsRefund())
                             {
-                                money_to_refund += tab_payment[i].getAmount();
-                                tab_payment[i].setIsRefund(true);
+                                money_to_refund += tab_payment[i]->getAmount();
+                                tab_payment[i]->setIsRefund(true);
                             }
                         }
                         tab_booking.erase(tab_booking.begin() + i);
@@ -677,21 +677,26 @@ void TravelAgency::addClient(string _email, string _username, string _password, 
                 if (money_to_refund != 0)
                 {
                     cout << "We will contact you soon to refund your " << money_to_refund << "€.." << endl;
+                    Payment* payment = new Payment(_client_id, _booking_id, -money_to_refund);
+                    payment->setID(payment_number);
+                    tab_payment.push_back(payment);
+                    payment->setIsRefund(true);
+                    payment_number++;
                 }
                 booking_number--;
                 for (int i = 0; i < client_number; i++)
                 {
-                    if (tab_client[i].getID() == _client_id)
+                    if (tab_client[i]->getID() == _client_id)
                     {
-                        tab_client[i].setBookingNumber(-1); // modify the booking_number according to the client_id
+                        tab_client[i]->setBookingNumber(-1); // modify the booking_number according to the client_id
                     } 
                 }
                 int a = 0;
                 for (int i = 0; i < booking_number; i++)
                 {
-                    if (tab_booking[i].getClientID() == _client_id)
+                    if (tab_booking[i]->getClientID() == _client_id)
                     {
-                        tab_booking[i].setID(a);
+                        tab_booking[i]->setID(a);
                         a++;
                     }
                 }
@@ -703,7 +708,7 @@ void TravelAgency::removeClient(int id)
 
     for (int i = 0; i < client_number; i++)
     {
-        if(tab_client[i].getID() == id)
+        if(tab_client[i]->getID() == id)
         {
             tab_client.erase(tab_client.begin() + i);
         }
@@ -712,7 +717,7 @@ void TravelAgency::removeClient(int id)
 
     for (int i = id; i < client_number; i++)
     {
-        tab_client[i].setID(i);
+        tab_client[i]->setID(i);
     }
 }
 
